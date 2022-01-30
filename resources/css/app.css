@@ -1,0 +1,146 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+.client {
+    border-bottom: 1px solid rgba(121, 120, 120, 0.603);
+    padding: 5px;
+    margin-top: 10px;
+   
+}
+.test-suchen {
+    border-bottom: 1px solid rgba(121, 120, 120, 0.603);
+    padding: 5px;
+    margin-top: 10px;
+    background-color: rgba(168, 168, 168, 0.185);
+    
+}
+.client-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.new-card {
+    background-color: #40916c !important;
+    font-size: 1.3rem !important;
+}
+
+.new-card:hover {
+    background-color: #d8f3dc !important;
+   
+}
+
+.new-card a {
+    color: #fff !important;
+}
+
+.new-card a:hover {
+    color: #111 !important;
+}
+
+.suchen-card {
+    background-color: #219ebc !important;
+    font-size: 1.2rem !important;
+}
+
+.suchen-card a {
+    color: #fff !important;
+}
+
+.suchen-card:hover {
+    background-color: #8ecae6 !important;
+}
+
+.suchen-card a:hover {
+    color: #111 !important;
+}
+
+.paginate {
+    margin-top: 1rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.inprogress-card {
+    background-color: #b69121 !important;
+    font-size: 1.2rem !important;
+}
+
+.inprogress-card a {
+    color: #fff !important;
+}
+
+.inprogress-card:hover {
+    background-color: #fad643 !important;
+}
+
+.inprogress-card a:hover {
+    color: #111 !important;
+}
+
+.client-info-list {
+    font-size: 22px !important;
+}
+
+.client-li {
+ display: flex;
+ border-bottom: 1px solid rgba(5, 5, 5, 0.192);
+}
+.client-att {
+    width: 300px;
+
+}
+.client-data {
+    font-weight: bold !important;
+}
+
+.stats-card {
+    background-color: #656d4a !important;
+    color: #fff !important;
+    font-size: 1.2rem !important;
+}
+
+.positive-card {
+    background-color: #a21232 !important;
+    color: #fff !important;
+    font-size: 1.2rem !important;
+}
+
+.positive-card:hover {
+    background-color: #e84a5f !important;
+    color: #111 !important;
+    font-size: 1.2rem !important;
+}
+.svg-icon {
+    fill: #fff;
+}
+
+.svg-icon:hover {
+    fill: #111;
+}
+
+.clients-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.dashboard-cards {
+    height: 250px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
