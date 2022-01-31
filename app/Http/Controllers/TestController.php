@@ -515,7 +515,7 @@ class TestController extends Controller
          if($test->digital == '1'){
             $to_name = $emailnamekunde;
             $to_email = $test->kunde->email;
-            $data = array('name'=>'Ogbonna Vitalis(sender_name)', 'body' => 'A test mail');
+            $data = array();
           
             Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email, $filename) {
             $message->to($to_email, $to_name)
@@ -530,5 +530,301 @@ class TestController extends Controller
         // return test
         return redirect('tests/'.$test->id);
 
+    }
+
+    public function emailErneutSenden($id)
+    {
+        $test = Test::with('kunde')->find($id);
+        $emailnameclient = $test->ln . ', ' . $test->fn;
+        $filename = $test->filename;
+
+        $to_name = $emailnameclient;
+
+        // if email is changed get the new one
+        $to_email = $test->kunde->email;
+        $data = array();
+      
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email, $filename) {
+        $message->to($to_email, $to_name)
+        ->subject('Bescheinigung')->attach($filename, [
+            'as' => date("d.m.Y") . ' Testergebnis.pdf',
+            'mime' => 'application/pdf',
+       ]);
+        $message->from(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'));
+        }); 
+        
+        return redirect('dashboard');
+    }
+
+    public function positive(){
+        $positivheute = Test::where('teststelle', '=', Auth::user()->teststelle)->where('ergebnis', '=', '7' )->whereDate('created_at', Carbon::today())->get(); 
+        return view('tests/positive', ['positiveheute' => $positivheute]);
+    }
+
+    public function positiveForm($id){
+
+        $test = Test::where('id', '=', $id)->with('kunde')->get();
+
+        // return $test;
+         return view('tests/positiveform', ['test' => $test]);
+    }
+
+    public function positiveFormPrepare($id, Request $request){
+
+        $test = Test::where('id', '=', $id)->with('kunde')->with('user')->get();
+
+        // Get month, name, date and time to create a unique filename for PDF 
+        $month = 'positivetesten/' . date("m-Y");
+        $name = $test[0]->ln . ', ' . $test[0]->fn;
+
+        $filename = $month . '/' . date("d.m.Y  -  H:i:s ") . $name . '.pdf';
+
+        if (!file_exists($month)) {
+            mkdir($month, 0777, true);
+        }
+       // return $test;
+        $pdf = new Fpdi();
+
+        $pageCount = $pdf->setSourceFile('positivtemplate.pdf');
+        $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
+
+        $pdf->addPage();
+        $pdf->useTemplate($pageId, 0, 0, 210, 297);
+        $pdf->SetFont('Helvetica');
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetFontSize(10);
+        $pdf->SetXY(10, 30);
+
+        $pdf->SetFontSize(9);
+        $pdf->setY(7);
+        $pdf->cell(3);
+        $pdf->Cell(0, 102, $request->gtel, 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(12);
+        $pdf->setY(7);
+        $pdf->cell(3);
+        $pdf->Cell(0, 126, $request->gname, 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(12);
+        $pdf->setY(7);
+        $pdf->cell(3);
+        $pdf->Cell(0, 149, $request->gstrasse, 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(12);
+        $pdf->setY(7);
+        $pdf->cell(3);
+        $pdf->Cell(0, 172, $request->gplz, 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(12);
+        $pdf->setY(7);
+        $pdf->cell(22);
+        $pdf->Cell(0, 172, $request->gcity, 0, 0, 'L');
+        $pdf->Ln();
+
+        $zentrumname = iconv('UTF-8', 'windows-1252', env('APP_NAME'));
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(91.5);
+        $pdf->Cell(0, 103, $zentrumname, 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(91.5);
+        $pdf->Cell(0, 123, $test[0]->user->teststelle, 0, 0, 'L');
+        $pdf->Ln();
+
+        $zentrumstr = iconv('UTF-8', 'windows-1252', env('STATION_STR'));
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(91.5);
+        $pdf->Cell(0, 141, $zentrumstr, 0, 0, 'L');
+        $pdf->Ln();
+
+        $zentrumplz = iconv('UTF-8', 'windows-1252', env('STATION_PLZ'));
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(91.5);
+        $pdf->Cell(0, 158, $zentrumplz, 0, 0, 'L');
+        $pdf->Ln();
+
+        $zentrumplz = iconv('UTF-8', 'windows-1252', env('STATION_ORT'));
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(113);
+        $pdf->Cell(0, 158, $zentrumplz, 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(91.5);
+        $pdf->Cell(0, 174, $test[0]->user->name, 0, 0, 'L');
+        $pdf->Ln();
+
+        
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(133.5);
+        $pdf->Cell(0, 174, env('STATION_TEL'), 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(97.5);
+        $pdf->Cell(0, 191, env('MAIL_FROM_ADDRESS'), 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(9);
+        $pdf->setY(7);
+        $pdf->cell(164.5);
+        $pdf->Cell(0, 193, Carbon::now()->format('d'), 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(9);
+        $pdf->setY(7);
+        $pdf->cell(171.5);
+        $pdf->Cell(0, 193, Carbon::now()->format('m'), 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(9);
+        $pdf->setY(7);
+        $pdf->cell(177.5);
+        $pdf->Cell(0, 193, Carbon::now()->format('Y'), 0, 0, 'L');
+        $pdf->Ln();
+
+        $kundename = iconv('UTF-8', 'windows-1252', $test[0]->ln. ', '. $test[0]->fn);
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(27);
+        $pdf->Cell(0, 213, $kundename, 0, 0, 'L');
+        $pdf->Ln();
+
+        if($request->gender == '1'){
+            $pdf->SetFontSize(10.1);
+            $pdf->setY(7);
+            $pdf->cell(92.1);
+            $pdf->Cell(0, 215.4, 'x', 0, 0, 'L');
+            $pdf->Ln();
+        }
+    
+        if($request->gender == '2'){
+            $pdf->SetFontSize(10.1);
+            $pdf->setY(7);
+            $pdf->cell(111.1);
+            $pdf->Cell(0, 215.4, 'x', 0, 0, 'L');
+            $pdf->Ln();
+        }
+       
+      
+        if($request->gender == '3'){
+            $pdf->SetFontSize(10.1);
+            $pdf->setY(7);
+            $pdf->cell(129.9);
+            $pdf->Cell(0, 215.4, 'x', 0, 0, 'L');
+            $pdf->Ln();
+        }
+   
+        $pdf->SetFontSize(9);
+        $pdf->setY(7);
+        $pdf->cell(164.5);
+        $pdf->Cell(0, 214, substr($test[0]->dob, 8, 2), 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(9);
+        $pdf->setY(7);
+        $pdf->cell(170.5);
+        $pdf->Cell(0, 214, substr($test[0]->dob, 5, 2), 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(9);
+        $pdf->setY(7);
+        $pdf->cell(176.5);
+        $pdf->Cell(0, 214, substr($test[0]->dob, 0, 4), 0, 0, 'L');
+        $pdf->Ln();
+
+        $kundenstr = iconv('UTF-8', 'windows-1252', $test[0]->addresse);
+        $pdf->SetFontSize(10);
+        $pdf->setY(7);
+        $pdf->cell(35);
+        $pdf->Cell(0, 235, $kundenstr, 0, 0, 'L');
+        $pdf->Ln();
+
+        $kundenstr = iconv('UTF-8', 'windows-1252', $test[0]->phone);
+        $pdf->SetFontSize(10);
+        $pdf->setY(16);
+        $pdf->cell(24);
+        $pdf->Cell(0, 255, $kundenstr, 0, 0, 'L');
+        $pdf->Ln();
+
+        $kundenstr = iconv('UTF-8', 'windows-1252', $test[0]->email);
+        $pdf->SetFontSize(10);
+        $pdf->setY(141.5);
+        $pdf->cell(14);
+        $pdf->Cell(0, 20, $kundenstr, 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(10);
+        $pdf->setY(166);
+        $pdf->cell(4);
+        $pdf->Cell(0, 20, 'X', 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(10);
+        $pdf->setY(179);
+        $pdf->cell(30);
+        $pdf->Cell(99.8, 6, date("d.m.Y", strtotime($test[0]->created_at)), 0, 0, 'L');
+        $pdf->Ln();
+
+        $kundenstr = iconv('UTF-8', 'windows-1252', $test[0]->hersteller) . ' (Covid-19 Antigen Rapid-Test)';
+        $pdf->SetFontSize(10);
+        $pdf->setY(178);
+        $pdf->cell(52);
+        $pdf->Cell(0, 20, $kundenstr, 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->SetFontSize(10);
+        $pdf->setY(205);
+        $pdf->cell(10);
+        $pdf->Cell(0, 20, 'X', 0, 0, 'L');
+        $pdf->Ln();
+
+        $kundenstr = iconv('UTF-8', 'windows-1252', 'Zuständigen Hausarzt/Hausärztin');
+        $pdf->SetFontSize(10);
+        $pdf->setY(204);
+        $pdf->cell(96);
+        $pdf->Cell(0, 20, $kundenstr, 0, 0, 'L');
+        $pdf->Ln();
+
+        $pdf->Output('F', $filename);
+
+        return view('tests/positivepresending', ['test' => $test[0], 'filename' => $filename]);
+    }
+    
+    public function positiveFormSend(Request $req, $id){
+
+        $test = Test::find($id);
+
+        $data['ghaanmeldung'] = '1';
+        $test->update($data);
+
+        $filename = $req->filename;
+        $to_name = 'Gesundheitsamt';
+        $to_email = 'armendzekjiri@gmail.com';
+        $data = array();
+      
+        Mail::send('emails.positive', $data, function($message) use ($to_name, $to_email, $filename) {
+        $message->to($to_email, $to_name)
+        ->subject('Positivmeldung')->attach($filename, [
+            'as' => date("d.m.Y") . ' Positivmeldung.pdf',
+            'mime' => 'application/pdf',
+       ]);
+        $message->from(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'));
+        });
+
+        return redirect('/positive');
     }
 }

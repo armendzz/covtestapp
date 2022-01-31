@@ -24,7 +24,7 @@
                         <a href="/inwartezeit">
                             <div class="card-body dashboard-cards">
                                 <h1 class="text-center">
-                                    431
+                                    {{count($inwartezeit)}}
                                 </h1>
                                 <h5 class="text-center">Test(s) in Wartezeit...</h5>
                             </div>
@@ -60,16 +60,18 @@
 
                     {{-- Positive falle card --}}
                     <div class="card col-md-3 m-3 positive-card">
-                        <div class="card-body dashboard-cards">
-                            <h1 class="text-center">22</h1>
-                            Positive Fälle
-                        </div>
+                        <a href="/positive">
+                            <div class="card-body dashboard-cards">
+                                <h1 class="text-center">{{$positivheute}}</h1>
+                                Positive Fälle
+                            </div>
+                        </a>
                     </div>
 
                     {{-- Today tests card --}}
                     <div class="card col-md-3 m-3 stats-card">
                         <div class="card-body dashboard-cards">
-                            <h1 class="text-center">33</h1>
+                            <h1 class="text-center">{{$testhute}}</h1>
                             Heute durchgeführte Tests
                         </div>
                     </div>
@@ -77,7 +79,7 @@
                     {{-- This month tests card --}}
                     <div class="card col-md-3 m-3 stats-card">
                         <div class="card-body dashboard-cards">
-                            <h1 class="text-center">444</h1>
+                            <h1 class="text-center">{{$thismonth}}</h1>
                             Diesen Monat durchgeführte Tests
                         </div>
                     </div>
