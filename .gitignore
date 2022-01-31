@@ -4,7 +4,7 @@
 /storage/*.key
 /vendor
 /public/testen
-/public/positive
+/public/positivetesten
 .env
 .env.backup
 .phpunit.result.cache
