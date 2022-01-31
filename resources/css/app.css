@@ -116,11 +116,20 @@ a {
     font-size: 1.2rem !important;
 }
 
+.positive-card a {
+    color: #fff !important;
+}
+
 .positive-card:hover {
     background-color: #e84a5f !important;
     color: #111 !important;
     font-size: 1.2rem !important;
 }
+
+.positive-card a:hover {
+    color: #111 !important;
+}
+
 .svg-icon {
     fill: #fff;
 }

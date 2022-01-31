@@ -38,6 +38,12 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('kunde-suchen') }}" :active="request()->routeIs('kunde-suchen')">
+                        {{ __('Kunden Suchen') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('test-suchen') }}" :active="request()->routeIs('test-suchen')">
                         {{ __('Test Suchen') }}
                     </x-jet-nav-link>
@@ -178,6 +184,10 @@
 
             <x-jet-responsive-nav-link href="{{ route('test-suchen') }}" :active="request()->routeIs('test-suchen')">
                 {{ __('Test Suchen') }}
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('kunde-suchen') }}" :active="request()->routeIs('kunde-suchen')">
+                {{ __('Kunden Suchen') }}
             </x-jet-responsive-nav-link>
         </div>
 

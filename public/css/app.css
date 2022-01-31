@@ -993,11 +993,11 @@ select {
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
-.m-3 {
-  margin: 0.75rem;
-}
 .m-2 {
   margin: 0.5rem;
+}
+.m-3 {
+  margin: 0.75rem;
 }
 .mx-auto {
   margin-left: auto;
@@ -1877,10 +1877,16 @@ a {
     color: #fff !important;
     font-size: 1.2rem !important;
 }
+.positive-card a {
+    color: #fff !important;
+}
 .positive-card:hover {
     background-color: #e84a5f !important;
     color: #111 !important;
     font-size: 1.2rem !important;
+}
+.positive-card a:hover {
+    color: #111 !important;
 }
 .svg-icon {
     fill: #fff;

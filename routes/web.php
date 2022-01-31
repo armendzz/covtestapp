@@ -50,11 +50,15 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/positiveform/{id}', [App\
 Route::middleware(['auth:sanctum', 'verified'])->post('/positiveformprepare/{id}', [App\Http\Controllers\TestController::class, 'positiveFormPrepare']);
 
 // Send fullyfilled pdf to gesundheitsamt
-Route::middleware(['auth:sanctum', 'verified'])->post('/positiveformsend/{id}', [App\Http\Controllers\TestController::class, 'positiveFormSend']);
+Route::middleware(['auth:sanctum', 'verified'])->put('/positiveformsend/{id}', [App\Http\Controllers\TestController::class, 'positiveFormSend']);
 
 // send all inexistent routes to dashboard or in login page if user is not logged in 
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+    return redirect('dashboard');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/{any}', function () {
-    return view('dashboard');
+    return redirect('dashboard');
 });
 
 

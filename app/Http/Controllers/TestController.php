@@ -801,19 +801,17 @@ class TestController extends Controller
 
         $pdf->Output('F', $filename);
 
-        return view('tests/positivepresending', ['test' => $test[0], 'filename' => $filename]);
+        return view('tests/positivepresending', ['test' => $test[0], 'filename' => $filename, 'gname' => $request->gname, 'gemail' => $request->gemail]);
     }
     
     public function positiveFormSend(Request $req, $id){
-
         $test = Test::find($id);
 
-        $data['ghaanmeldung'] = '1';
-        $test->update($data);
-
+        Test::where('id', $id)->update(array('ghaanmeldung' => '1'));
+    
         $filename = $req->filename;
-        $to_name = 'Gesundheitsamt';
-        $to_email = 'armendzekjiri@gmail.com';
+        $to_name = $req->gname;
+        $to_email = $req->gemail;
         $data = array();
       
         Mail::send('emails.positive', $data, function($message) use ($to_name, $to_email, $filename) {

@@ -1,7 +1,7 @@
 <p>
     Sehr geehrte Damen und Herren,
 </p>
-<p>im Anhang finden Sie eine Positive fälle. </p>
+<p>im Anhang finden Sie einee Positiven fall. </p>
 <br>
 <p>Bei weiteren Fragen, rufen Sie bitte unter der {{ env('STATION_TEL') }} an.</p>
 <br>
