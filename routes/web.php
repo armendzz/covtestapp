@@ -34,6 +34,9 @@ Route::resource('tests', TestController::class, [
 // Show all test without ergebnis
 Route::middleware(['auth:sanctum', 'verified'])->get('/inwartezeit', [App\Http\Controllers\TestController::class, 'inWarteZeit'])->name('inwartezeit');
 
+// Import data only developer mode
+Route::middleware(['auth:sanctum', 'verified'])->post('/import', [App\Http\Controllers\KundeController::class, 'importdata'])->name('importdata');
+
 // Route for Setting result and Print or send in email result
 Route::middleware(['auth:sanctum', 'verified'])->put('/test-ergebnis/{id}', [App\Http\Controllers\TestController::class, 'testErgebnis'])->name('testergebnis');
 

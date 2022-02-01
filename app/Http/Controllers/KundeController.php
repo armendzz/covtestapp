@@ -8,6 +8,22 @@ use Illuminate\Support\Facades\Validator;
 
 class KundeController extends Controller
 {
+
+    public function importdata(Request $request){
+
+        $client = Kunde::Create([
+            'fn' => ucfirst($request->vorname),
+             'ln' => ucfirst($request->nachname),
+             'addresse' => ucfirst($request->anschrift),
+             'dob' => $request->birthday,
+             'email' => $request->email,
+             'phone' => $request->phone,
+             'idnumber' => $request->idnumber,
+        ]);
+
+        return 'ok';
+    }
+
     /**
      * Display a listing of the resource.
      *
