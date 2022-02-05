@@ -43,11 +43,11 @@
                     <label for="gender" class="col-sm-2 col-form-label col-form-label-lg">Geschlecht *</label>
                     <div class="col-sm-10">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="mannlich" value="1" required>
+                            <input class="form-check-input" type="radio" name="gender" id="mannlich" value="2" required>
                             <label class="form-check-label" for="asd">Männlich</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="weiblich" value="2" required>
+                            <input class="form-check-input" type="radio" name="gender" id="weiblich" value="1" required>
                             <label class="form-check-label" for="asd">Weiblich</label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -78,6 +78,23 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="idnumber" class="col-sm-2 col-form-label col-form-label-lg">PCR-Test veranlasst:</label>
+                    <div class="col-sm-10">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="pcrradio" id="ja" value="ja" required>
+                            <label class="form-check-label" for="asd">Ja</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="pcrradio" id="nein" value="nein"
+                                required>
+                            <label class="form-check-label" for="asd">Nein</label>
+                        </div>
+                        <input type="text" class="form-control form-control-lg"
+                            autocomplete="autocomplete_off_hack_xfr4!k" name="pcr">
+                    </div>
+
+                </div>
+                <div class="form-group row">
                     <label for="idnumber" class="col-sm-2 col-form-label col-form-label-lg">Personalausweis-Nr.</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-lg"
@@ -92,7 +109,7 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="gesundheitsamt" id="oberhausen"
                                 value="oberhausen" required>
-                            <label class="form-check-label" for="asd">Oberhuasen</label>
+                            <label class="form-check-label" for="asd">Oberhausen</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="gesundheitsamt" id="bottrop"
@@ -108,6 +125,11 @@
                             <input class="form-check-input" type="radio" name="gesundheitsamt" id="wesel" value="wesel"
                                 required>
                             <label class="form-check-label" for="asd">Wesel</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gesundheitsamt" id="essen" value="essen"
+                                required>
+                            <label class="form-check-label" for="asd">Essen</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="gesundheitsamt" id="andre" value="andre"
@@ -127,34 +149,34 @@
                     <div class="form-group row">
                         <label for="plz " class="col-sm-2 col-form-label col-form-label-lg">PLZ *</label>
                         <div class="col-md-3">
-                            <input type="text" id="gplz" class="form-control form-control-lg" name="gplz" required  />
+                            <input type="text" id="gplz" class="form-control form-control-lg" name="gplz" required />
                         </div>
                         <label for="city" class="col-sm-2 col-form-label col-form-label-lg">Stadt *</label>
                         <div class="col-md-5">
-                            <input type="text" id="gcity" class="form-control form-control-lg" name="gcity" required  />
+                            <input type="text" id="gcity" class="form-control form-control-lg" name="gcity" required />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="strasse" class="col-sm-2 col-form-label col-form-label-lg">Straße *</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control form-control-lg" id="gstrasse" name="gstrasse"
-                                 required>
+                                required>
                         </div>
                     </div>
                     <div class="form-group row">
-                      <label for="g-tel" class="col-sm-2 col-form-label col-form-label-lg">Tel: *</label>
-                      <div class="col-sm-10">
-                          <input type="text" class="form-control form-control-lg"
-                              autocomplete="autocomplete_off_hack_xfr4!k" name="gtel" id="gtel" required>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="g-tel" class="col-sm-2 col-form-label col-form-label-lg">Email: *</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control form-control-lg"
-                            autocomplete="autocomplete_off_hack_xfr4!k" name="gemail" id="gemail" required>
+                        <label for="g-tel" class="col-sm-2 col-form-label col-form-label-lg">Tel: *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-lg"
+                                autocomplete="autocomplete_off_hack_xfr4!k" name="gtel" id="gtel" required>
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group row">
+                        <label for="g-tel" class="col-sm-2 col-form-label col-form-label-lg">Email: *</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-lg"
+                                autocomplete="autocomplete_off_hack_xfr4!k" name="gemail" id="gemail" required>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row justify-content-center">
                     <button type="submit" class="btn btn-lg btn-success py-3 px-5"> Gesundheitsamt Anmelden</button>
@@ -162,56 +184,66 @@
             </form>
         </div>
     </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>
-  $('input[type=radio][name=gesundheitsamt]').change(function() {
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script>
+        $('input[type=radio][name=gesundheitsamt]').change(function() {
 
-    if (this.value == 'oberhausen') {
-      $("#gname").val('Gesundheitsamt Oberhausen');
-      $("#gplz").val('46045');
-      $("#gcity").val('Oberhausen');
-      $("#gstrasse").val('Tannenbergstraße 11-13');
-      $("#gtel").val('02088252570');
-      $("#gemail").val('Infektionsmeldungen@oberhausen.de');
-    }
+            if (this.value == 'oberhausen') {
+                $("#gname").val('Gesundheitsamt Oberhausen');
+                $("#gplz").val('46045');
+                $("#gcity").val('Oberhausen');
+                $("#gstrasse").val('Tannenbergstraße 11-13');
+                $("#gtel").val('02088252570');
+                $("#gemail").val('Infektionsmeldungen@oberhausen.de');
+            }
 
-    if (this.value == 'bottrop') {
-      $("#gname").val('Gesundheitsamt Bottrop');
-      $("#gplz").val('46236');
-      $("#gcity").val('Bottrop');
-      $("#gstrasse").val('Gladbecker Str. 66');
-      $("#gtel").val('02041705080');
-      $("#gemail").val('infektionsschutz@bottrop.de');
-    }
+            if (this.value == 'bottrop') {
+                $("#gname").val('Gesundheitsamt Bottrop');
+                $("#gplz").val('46236');
+                $("#gcity").val('Bottrop');
+                $("#gstrasse").val('Gladbecker Str. 66');
+                $("#gtel").val('02041705080');
+                $("#gemail").val('infektionsschutz@bottrop.de');
+            }
 
-    if (this.value == 'duisburg') {
-      $("#gname").val('Gesundheitsamt Duisburg');
-      $("#gplz").val('47119');
-      $("#gcity").val('Duisburg');
-      $("#gstrasse").val('Ruhrorter Str. 195');
-      $("#gtel").val('020394000');
-      $("#gemail").val('gesundheitsaufsicht@stadt-Duisburg.de');
-    }
+            if (this.value == 'duisburg') {
+                $("#gname").val('Gesundheitsamt Duisburg');
+                $("#gplz").val('47119');
+                $("#gcity").val('Duisburg');
+                $("#gstrasse").val('Ruhrorter Str. 195');
+                $("#gtel").val('020394000');
+                $("#gemail").val('gesundheitsaufsicht@stadt-Duisburg.de');
+            }
 
-    if (this.value == 'wesel') {
-      $("#gname").val('Gesundheitsamt Kreis Wesel');
-      $("#gplz").val('46483');
-      $("#gcity").val('Wesel');
-      $("#gstrasse").val('Jülicher Str. 6');
-      $("#gtel").val('02812070');
-      $("#gemail").val('pocmeldung@kreis-wesel.de');
-    }
+            if (this.value == 'wesel') {
+                $("#gname").val('Gesundheitsamt Kreis Wesel');
+                $("#gplz").val('46483');
+                $("#gcity").val('Wesel');
+                $("#gstrasse").val('Jülicher Str. 6');
+                $("#gtel").val('02812070');
+                $("#gemail").val('pocmeldung@kreis-wesel.de');
+            }
 
+            if (this.value == 'essen') {
+                $("#gname").val('Gesundheitsamt Essen');
+                $("#gplz").val('45127');
+                $("#gcity").val('Essen');
+                $("#gstrasse").val('Hindenburgstr. 29');
+                $("#gtel").val('02018853000');
+                $("#gemail").val('juliane.boettcher@gesundheitsamt.essen.de');
+            }
 
-    if (this.value == 'andre') {
-      $("#gname").val('');
-      $("#gplz").val('');
-      $("#gcity").val('');
-      $("#gstrasse").val('');
-      $("#gtel").val('');
-      $("#gemail").val('');
-    }
+            if (this.value == 'andre') {
+                $("#gname").val('');
+                $("#gplz").val('');
+                $("#gcity").val('');
+                $("#gstrasse").val('');
+                $("#gtel").val('');
+                $("#gemail").val('');
+            }
 
-});
-</script>
+        });
+    </script>
 </x-app-layout>
