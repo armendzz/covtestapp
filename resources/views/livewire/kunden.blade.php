@@ -63,7 +63,7 @@
                                     
                                     {{-- show more kunden daten --}}
                                     <p class="text-gray-500 text-sm">{{ $kunde->email }} | {{ $kunde->addresse }} |
-                                        {{ $kunde->dob }} | Getestet: {{ count($kunde->tests) }}x</p>
+                                        {{ $kunde->dob }} | Getestet: x</p>
                                     <p class="text-gray-500"></p>
 
                                 </div>

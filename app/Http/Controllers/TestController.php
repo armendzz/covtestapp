@@ -604,13 +604,15 @@ class TestController extends Controller
         $pdf->SetFontSize(12);
         $pdf->setY(7);
         $pdf->cell(3);
-        $pdf->Cell(0, 126, $request->gname, 0, 0, 'L');
+        $gname = iconv('UTF-8', 'windows-1252', $request->gname);
+        $pdf->Cell(0, 126, $gname, 0, 0, 'L');
         $pdf->Ln();
-
+        
+        $gstrasse = iconv('UTF-8', 'windows-1252', $request->gstrasse);
         $pdf->SetFontSize(12);
         $pdf->setY(7);
         $pdf->cell(3);
-        $pdf->Cell(0, 149, $request->gstrasse, 0, 0, 'L');
+        $pdf->Cell(0, 149, $gstrasse, 0, 0, 'L');
         $pdf->Ln();
 
         $pdf->SetFontSize(12);
@@ -786,18 +788,37 @@ class TestController extends Controller
         $pdf->Cell(0, 20, $kundenstr, 0, 0, 'L');
         $pdf->Ln();
 
+        if($request['pcrradio'] == 'ja'){
+            $pdf->SetFontSize(10);
+            $pdf->setY(199.5);
+            $pdf->cell(10);
+            $pdf->Cell(0, 20, 'X', 0, 0, 'L');
+            $pdf->Ln();
+
+            $pdf->SetFontSize(10);
+            $pdf->setY(198);
+            $pdf->cell(40);
+            $pcr =  iconv('UTF-8', 'windows-1252', $request['pcrja']);
+            $pdf->Cell(0, 20, $pcr, 0, 0, 'L');
+            $pdf->Ln();
+        }
+
+        if($request['pcrradio'] == 'nein'){
+
         $pdf->SetFontSize(10);
         $pdf->setY(205);
         $pdf->cell(10);
         $pdf->Cell(0, 20, 'X', 0, 0, 'L');
         $pdf->Ln();
 
-        $kundenstr = iconv('UTF-8', 'windows-1252', 'Zuständigen Hausarzt/Hausärztin');
+        $kundenstr = iconv('UTF-8', 'windows-1252', $request['pcrnein']);
         $pdf->SetFontSize(10);
         $pdf->setY(204);
         $pdf->cell(96);
         $pdf->Cell(0, 20, $kundenstr, 0, 0, 'L');
         $pdf->Ln();
+
+        }
 
         $pdf->Output('F', $filename);
 
