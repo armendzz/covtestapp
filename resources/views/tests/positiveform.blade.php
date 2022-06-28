@@ -43,11 +43,11 @@
                     <label for="gender" class="col-sm-2 col-form-label col-form-label-lg">Geschlecht *</label>
                     <div class="col-sm-10">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="mannlich" value="1" required>
+                            <input class="form-check-input" type="radio" name="gender" id="mannlich" value="2" required>
                             <label class="form-check-label" for="asd">Männlich</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" id="weiblich" value="2" required>
+                            <input class="form-check-input" type="radio" name="gender" id="weiblich" value="1" required>
                             <label class="form-check-label" for="asd">Weiblich</label>
                         </div>
                         <div class="form-check form-check-inline">

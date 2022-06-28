@@ -30,7 +30,8 @@ Route::resource('tests', TestController::class, [
     'names' => [
         'index' => 'test-suchen',
         ]])->middleware('auth');
-
+//
+Route::get('/armendtest', [App\Http\Controllers\KundeController::class, 'armend']);
 // Show all test without ergebnis
 Route::middleware(['auth:sanctum', 'verified'])->get('/inwartezeit', [App\Http\Controllers\TestController::class, 'inWarteZeit'])->name('inwartezeit');
 
@@ -39,6 +40,9 @@ Route::middleware(['auth:sanctum', 'verified'])->put('/test-ergebnis/{id}', [App
 
 // Route for resend email with new data or if something went wrong
 Route::middleware(['auth:sanctum', 'verified'])->post('/emailerneutsenden/{id}', [App\Http\Controllers\TestController::class, 'emailErneutSenden'])->name('emailerneutsenden');
+
+// send info email for postivie kunden
+Route::middleware(['auth:sanctum', 'verified'])->post('/infomailpositiv/{id}', [App\Http\Controllers\TestController::class, 'infoMailPositiv'])->name('infoMailPositiv');
 
 // Show all positive result
 Route::middleware(['auth:sanctum', 'verified'])->get('/positive', [App\Http\Controllers\TestController::class, 'positive'])->name('positiv');

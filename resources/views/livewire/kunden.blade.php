@@ -4,9 +4,9 @@
         {{-- Search box start --}}
         <form method="get">
             <div class="form-group row">
-                <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Kundenname</label>
+                <label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Testdaten</label>
                 <div class="col-sm-10">
-                    <input class="form-control form-control-lg" type="text" placeholder="Kunde suchen"
+                    <input class="form-control form-control-lg" type="text" placeholder="Test suchen"
                         wire:model="term" />
                 </div>
             </div>
@@ -15,7 +15,7 @@
 
         <hr>
         <div class="list">
-            <div wire:loading>Searching kunden...</div>
+            <div wire:loading>Searching Test...</div>
             <div wire:loading.remove>
                 <!-- 
             notice that $term is available as a public 
@@ -23,9 +23,9 @@
             data array 
         -->
                 @if ($term == '')
-                    <div class="text-gray-500 text-sm">
+                    <!-- <div class="text-gray-500 text-sm">
                         Bitte mindesten 3 Buchstaben eingeben.
-                    </div>
+                    </div> -->
                 @else
                     @if (isset($kunden))
                         @if ($kunden->isEmpty())
@@ -47,10 +47,10 @@
                                             </a>
                                             
                                             {{-- Daten bearbeiten button --}}
-                                            <a
+                                            <!-- <a
                                                 class="btn btn-info mx-2 btn-md"
                                                 href="/kunde/{{ $kunde->id }}/edit">Daten bearbeiten
-                                            </a>
+                                            </a> -->
                                             
                                             {{-- Delete button --}}
                                             <form action="/kunde/{{ $kunde->id }}" method="post">@csrf
@@ -63,12 +63,12 @@
                                     
                                     {{-- show more kunden daten --}}
                                     <p class="text-gray-500 text-sm">{{ $kunde->email }} | {{ $kunde->addresse }} |
-                                        {{ $kunde->dob }} | Getestet: {{ count($kunde->tests) }}x</p>
+                                        {{ $kunde->dob }} </p>
                                     <p class="text-gray-500"></p>
 
                                 </div>
                             @endforeach
-                        @endif
+			    @endif
                     @else
                         <div class="text-gray-500 text-sm">
                             Bitte mindesten 3 Buchstaben eingeben.

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Neuer Kunde') }}
+            {{ __('Neuer Test') }}
         </h2>
     </x-slot>
 
@@ -11,7 +11,7 @@
         <h5 class="alert text-center alert-info"> Name: {{ $kunde->ln }}, {{ $kunde->fn }} - Geb:
             {{ $kunde->dob }} - Anschrift: {{ $kunde->addresse }} <a href="clients/{{ $kunde->id }}"
                 class="btn btn-primary">Testen</a> <a href="clients/{{ $kunde->id }}/edit"
-                class="btn btn-info">Kundendaten bearbeiten</a> </h5>
+                class="btn btn-info">Testdaten bearbeiten</a> </h5>
     @endif
 
     <div class="container px-3 pb-5">
@@ -32,7 +32,7 @@
             </div>
         @endif
 
-        <h3 class="mt-2 pt-2"> <strong> Neuer Kunde</strong></h3>
+        <h3 class="mt-2 pt-2"> <strong> Neuer Test</strong></h3>
         <div class="card p-2">
             <form class="m-2" action="/kunde" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -118,7 +118,7 @@
 
                 {{-- Submit input --}}
                 <div class="form-group row justify-content-center">
-                    <button type="submit" class="btn btn-lg btn-primary py-3 px-5"> + Kunde speichern</button>
+                    <button type="submit" class="btn btn-lg btn-primary py-3 px-5"> + Test speichern</button>
                 </div>
             </form>
         </div>

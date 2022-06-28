@@ -8,7 +8,15 @@ use Illuminate\Support\Facades\Validator;
 
 class KundeController extends Controller
 {
-    /**
+    
+	public function armend(){
+
+	$kunden = Kunde::where('fn', 'like', 'mul%')->orWhere('ln', 'like', 'mul%')->get();
+	return $kunden;
+
+	}
+
+	/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

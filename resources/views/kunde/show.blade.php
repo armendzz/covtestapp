@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Aktueller Kunde') }}
+            {{ __('Aktueller Test') }}
         </h2>
     </x-slot>
 
@@ -10,8 +10,8 @@
 
             {{-- Kudendaten bearbeiten button --}}
             <div class="card-header d-flex justify-content-between">
-                <h4>Kundendaten</h4> <a class="btn btn-secondary btn-md"
-                    href="/kunde/{{ $kunde->id }}/edit">Kundendaten bearbeiten</a>
+                <h4>Testdaten</h4> <a class="btn btn-secondary btn-md"
+                    href="/kunde/{{ $kunde->id }}/edit">Testdaten bearbeiten</a>
             </div>
 
             {{-- show kunden daten --}}

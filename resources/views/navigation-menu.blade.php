@@ -15,7 +15,7 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('kunde-create') }}" :active="request()->routeIs('kunde-create')">
-                        {{ __('Neuer Kunde') }}
+                        {{ __('Neuer Test') }}
                     </x-jet-nav-link>
                 </div>
             
@@ -37,11 +37,6 @@
                     </x-jet-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('kunde-suchen') }}" :active="request()->routeIs('kunde-suchen')">
-                        {{ __('Kunden Suchen') }}
-                    </x-jet-nav-link>
-                </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('test-suchen') }}" :active="request()->routeIs('test-suchen')">
@@ -175,7 +170,7 @@
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('kunde-create') }}" :active="request()->routeIs('kunde-create')">
-                {{ __('Neuer Kunde') }}
+                {{ __('Neuer Test') }}
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('inwartezeit') }}" :active="request()->routeIs('inwartezeit')">
@@ -186,9 +181,6 @@
                 {{ __('Test Suchen') }}
             </x-jet-responsive-nav-link>
 
-            <x-jet-responsive-nav-link href="{{ route('kunde-suchen') }}" :active="request()->routeIs('kunde-suchen')">
-                {{ __('Kunden Suchen') }}
-            </x-jet-responsive-nav-link>
         </div>
 
         

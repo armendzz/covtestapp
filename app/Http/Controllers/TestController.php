@@ -457,7 +457,8 @@ class TestController extends Controller
 
         $pdf->setY(142);
         $pdf->cell(62.7);
-        $pdf->Cell(124, 6, Auth::user()->name, 1, 0, 'L');
+	$username = iconv('UTF-8', 'windows-1252', Auth::user()->name);
+	$pdf->Cell(124, 6, $username, 1, 0, 'L');
         $pdf->Ln();
 
         $pdf->setY(163.5);
@@ -792,7 +793,7 @@ class TestController extends Controller
         $pdf->Cell(0, 20, 'X', 0, 0, 'L');
         $pdf->Ln();
 
-        $kundenstr = iconv('UTF-8', 'windows-1252', 'Zuständigen Hausarzt/Hausärztin');
+        $kundenstr = iconv('UTF-8', 'windows-1252', 'das Gesundheitsamt');
         $pdf->SetFontSize(10);
         $pdf->setY(204);
         $pdf->cell(96);
@@ -820,6 +821,24 @@ class TestController extends Controller
             'as' => date("d.m.Y") . ' Positivmeldung.pdf',
             'mime' => 'application/pdf',
        ]);
+        $message->from(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'));
+        });
+
+        return redirect('/positive');
+    }
+
+    public function infoMailPositiv(Request $req, $id){
+        $test = Test::find($id);
+
+        Test::where('id', $id)->update(array('kundeinformieren' => '1'));
+        
+        $to_name = $test->fn . ' ' . $test->ln;
+        $to_email = $test->email;
+        $data = array();
+      
+        Mail::send('emails.infopositive', $data, function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name)
+        ->subject('Positivmeldung Informationen');
         $message->from(env('MAIL_FROM_ADDRESS'),env('MAIL_FROM_NAME'));
         });
 

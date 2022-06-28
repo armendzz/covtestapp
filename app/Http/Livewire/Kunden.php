@@ -12,7 +12,9 @@ class Kunden extends Component
     {
         // check if input is large as 3 chars then send query to db, to avoid too much result
         if(strlen($this->term) >= 3){
-            // check only for vorname and nachname
+		// check only for vorname and nachname
+	
+		//$this->term = rtrim($this->term, " ");
             $kunden = Kunde::where('fn', 'like', $this->term .'%')->orWhere('ln', 'like', $this->term .'%')->get();
                 $data = [
                     'kunden' => $kunden,

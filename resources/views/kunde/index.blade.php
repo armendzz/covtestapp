@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Kunde suchen') }}
+            {{ __('Test suchen') }}
         </h2>
     </x-slot>
 
@@ -11,7 +11,7 @@
             <div class="card-body">
                 @if ($kunden->isEmpty())
                     <div class="text-gray-500 text-sm">
-                        Keine Kunden vorhanden.
+                        Keine Tests vorhanden.
                     </div>
                 @else
                     @foreach ($kunden as $kunde)

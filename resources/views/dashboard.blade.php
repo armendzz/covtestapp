@@ -14,7 +14,7 @@
                         <a href="/kunde/create">
                             <div class="card-body dashboard-cards">
                                 <h1 class="text-center">+</h1>
-                                <h3 class="text-center">Neuer Kunde</h3>
+                                <h3 class="text-center">Neuer Test</h3>
                             </div>
                         </a>
                     </div>
@@ -35,14 +35,14 @@
                 <div class="row justify-content-center">
 
                     {{-- Kunde suchen Card --}}
-                    <div class="card col-md-3 m-3 suchen-card">
+                    <!-- <div class="card col-md-3 m-3 suchen-card">
                         <a href="/kunde">
                             <div class="card-body dashboard-cards">
                                 <img src="https://img.icons8.com/ios-filled/50/000000/search--v4.png" />
                                 <h3 class="text-center pt-3">Kunde suchen</h3>
                             </div>
                         </a>
-                    </div>
+                    </div> -->
 
                     {{-- Test suchen Card --}}
                     <div class="card col-md-3 m-3 suchen-card">
