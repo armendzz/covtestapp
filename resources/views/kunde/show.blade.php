@@ -50,19 +50,40 @@
                         @csrf
                         <input type="hidden" name="kundeid" value="{{ $kunde->id }}">
                         <input type="hidden" name="digital" value="0">
-                        <button class="btn-primary btn">Testen & Drucken</button>
+                        <input type="hidden" name="price" id="pricedrucken" value="">
+                        <button class="btn-primary btn" id="btndrucken" disabled>Testen & Drucken</button>
                     </form>
-
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" onclick="kosten()"  name="kosten" value="free" id="free">
+                            <label class="form-check-label text-lg text-success" for="free">Kostenlos</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" onclick="kosten()"  name="kosten" value="paid" id="paid">
+                            <label class="form-check-label text-lg text-danger" for="paid">Kostenpflicht</label>
+                        </div>
+                      
+                    </div>
                     {{-- Show "Testen & Email" button only if kunde has e-mail --}}
                     @if (isset($kunde->email))
                         <form action="/tests" method="post" enctype="multipart/form">
                             @csrf
                             <input type="hidden" name="kundeid" value="{{ $kunde->id }}">
                             <input type="hidden" name="digital" value="1">
-                            <button class="btn-info btn">Testen & E-mail</button>
+                            <input type="hidden" name="price" id="priceemail" value="">
+                            <button class="btn-info btn" id="btnemail" disabled>Testen & E-mail</button>
                         </form>
                     @endif
-
+                    <script>
+                        function kosten(){
+                            let price = document.querySelector('input[name="kosten"]:checked').value;
+                            document.getElementById('btnemail').disabled = false;
+                            document.getElementById('btndrucken').disabled = false;
+                            document.getElementById('pricedrucken').value = price;
+                            document.getElementById('priceemail').value = price;
+                            
+                        }
+                    </script>
                 </div>
             </div>
         </div>

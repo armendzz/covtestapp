@@ -6,11 +6,11 @@
     </x-slot>
     <div class="container pb-5">
         <div class="card">
-            <div class="text-center mt-1"><strong>Info:</strong> GH = Gesundheitsamt, KD = Kunde</div>
+            <div class="text-center mt-1"><strong>Info:</strong> GA = Gesundheitsamt,    KD = Kunde</div>
             <div class="card-body">
                 @if ($positiveheute->isEmpty())
                     <div class="text-gray-500 text-sm">
-                        Kein Test mit den eingegebenen Daten gefunden.
+                        Kein positiven Test gefunden.
                     </div>
                 @else
                     <table class="table table-striped">
@@ -18,8 +18,8 @@
                             <tr>
                                 <th scope="col">Kunde/Kundin</th>
                                 <th scope="col">Getestet durch</th>
-                                <th scope="col">Kunde <br> Angemelded</th>
-                                <th scope="col">Gesundheitsamt <br> Angemeldet</th>
+                                <th scope="col">Kunde <br> informiert</th>
+                                <th scope="col">Gesundheitsamt <br> gemeldet</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -59,13 +59,16 @@
                                                     <a class="btn btn-primary mx-2 btn-md"
                                                         href="/tests/{{ $test->id }}">Test ansehen</a>
                                                     <a class="btn btn-success mx-2 btn-md"
-                                                        href="/positiveform/{{ $test->id }}">GH
-                                                        Anmelden</a>
+                                                        href="/positiveform/{{ $test->id }}">GA
+                                                        melden</a>
                                                         <form action="/infomailpositiv/{{ $test->id }}" 
                                                             method="post">@csrf 
                                                             <button type="submit" class="btn btn-warning mx-2 btn-md"
+                                                            @if($test->digital == 0)
+                                                            disabled
+                                                            @endif
                                                         >KD
-                                                        Anmelden</button>
+                                                        informieren</button>
                                                         </form>
                                                         
                                                 </div>

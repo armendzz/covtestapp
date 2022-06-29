@@ -53,6 +53,22 @@
                             </div>
                         </a>
                     </div>
+                    <div class="card col-md-3 m-3 suchen-card">
+                        <a href="/allerechnungen">
+                            <div class="card-body dashboard-cards">
+                                <img src="https://img.icons8.com/ios-filled/50/000000/search--v4.png" />
+                                <h3 class="text-center pt-3">Alles Rechnungen</h3>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card col-md-3 m-3 suchen-card">
+                        <a href="/rechnung">
+                            <div class="card-body dashboard-cards">
+                                <img src="https://img.icons8.com/ios-filled/50/000000/search--v4.png" />
+                                <h3 class="text-center pt-3">Rechnung suchen</h3>
+                            </div>
+                        </a>
+                    </div>
 
                 </div>
                 <hr>
@@ -72,6 +88,19 @@
                     <div class="card col-md-3 m-3 stats-card">
                         <div class="card-body dashboard-cards">
                             <h1 class="text-center">{{$testhute}}</h1>
+                            <div class="flex">
+                            <h2 class="text-center mx-2  p-2 col-span-5">
+                                {{ $testsheutefree }}
+                                <br>
+                                <span class="text-sm">Kostenlos</span>
+                            </h2>
+                            <h2 class="text-center mx-2  p-2 col-span-6">
+                                {{ $testsheutepaid }}
+                                <br>
+                                <span class="text-sm">Kostenpflichtig</span>
+                            </h2>
+                        </div>
+                            
                             Heute durchgeführte Tests
                         </div>
                     </div>

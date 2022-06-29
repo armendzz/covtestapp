@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KundeController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\RechnungController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,13 @@ Route::resource('tests', TestController::class, [
     'names' => [
         'index' => 'test-suchen',
         ]])->middleware('auth');
+
+// Rechnung Routes - only for loggedin user 
+Route::middleware(['auth:sanctum', 'verified'])->get('/rechnung', [App\Http\Controllers\RechnungController::class, 'index'])->name('rechnungenindex');
+Route::middleware(['auth:sanctum', 'verified'])->get('/rechnung/{id}', [App\Http\Controllers\RechnungController::class, 'show'])->name('rechnungenshow');
+Route::middleware(['auth:sanctum', 'verified'])->post('/allesrechnungen', [App\Http\Controllers\RechnungController::class, 'dayrechnungen'])->name('allesrechnungens');
+Route::middleware(['auth:sanctum', 'verified'])->post('/rechnungdownload', [App\Http\Controllers\RechnungController::class, 'rechnungdownload'])->name('rechnungdownload');
+Route::middleware(['auth:sanctum', 'verified'])->get('/allerechnungen', [App\Http\Controllers\RechnungController::class, 'alles'])->name('allerechnungens');
 //
 Route::get('/armendtest', [App\Http\Controllers\KundeController::class, 'armend']);
 // Show all test without ergebnis

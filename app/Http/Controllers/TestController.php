@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Kunde;
 use App\Models\Test;
+use App\Models\Rechnung;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +43,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {   
+        
         // get kunde to create test with kunden data
         $kunde = Kunde::find($request->kundeid);
 
@@ -60,6 +62,7 @@ class TestController extends Controller
             'salt' => strtoupper(bin2hex(random_bytes(16))),
             'addresse' => $kunde->addresse,
             'kunde_id' => $kunde->id,
+            'price' => $request->price,
             'user_id' => Auth::user()->id,
             'digital' => $request->digital,
             'test_nr' => $testnr,
@@ -77,6 +80,93 @@ class TestController extends Controller
 
         // Create test and send user to dashboard
         $test = Test::Create($testdata);
+
+        if($request->price == 'paid'){
+            $rechnung = new Rechnung;
+
+            $rechnungDb = Rechnung::whereDate('created_at', Carbon::today())->get();
+            $rechnungNrHeute = count($rechnungDb) + 1;
+            
+            if($rechnungNrHeute < 10){
+                $rechnungNrHeutee = "00$rechnungNrHeute";
+            } else if($rechnungNrHeute < 100) {
+                $rechnungNrHeutee = "0$rechnungNrHeute";
+            } else if ($rechnungNrHeute < 1000){
+                $rechnungNrHeutee = "$rechnungNrHeute";
+            }
+           
+            $rechnung->test_id = $test->id;
+            $rechnung->rechung_nr = Carbon::now()->format('y') . Carbon::now()->format('m') . Carbon::now()->format('d') . $rechnungNrHeutee;
+            
+
+            $foldername = 'rechnungen/' . date("Y/m/d");
+            
+            if (!file_exists($foldername)) {
+                mkdir($foldername, 0777, true);
+            }
+       
+            $filename = $foldername . '/' . $rechnung->rechung_nr  . '.pdf';
+
+
+            $rechnung->filename = $filename;
+            $rechnung->save();
+
+            $pdf = new Fpdi();
+
+        $pageCount = $pdf->setSourceFile('rechnung.pdf');
+        $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
+
+        $pdf->addPage();
+        $pdf->useTemplate($pageId, 0, 0, 210, 297);
+        $pdf->SetFont('Helvetica');
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->SetFontSize(11);
+        $pdf->SetXY(10, 30);
+
+     
+
+     
+        $name = $test->ln . ', ' . $test->fn;
+        $name = iconv('UTF-8', 'windows-1252', $name);
+        $pdf->setY(25.5);
+        $pdf->cell(13.5);
+        $pdf->Cell(60, 6, $name, 0, 0, 'L');
+        $pdf->Ln();
+        $pdf->setY(30.5);
+        $pdf->cell(13.5);
+        $address = iconv('UTF-8', 'windows-1252', $test->addresse);
+        $pdf->Cell(124, 6, $address, 0, 0, 'L');
+        $pdf->Ln();
+      
+    
+        $pdf->setY(93.4);
+        $pdf->cell(41.4);
+        $pdf->Cell(99.8, 6, $rechnung->rechung_nr, 0, 0, 'L');
+        $pdf->Ln();
+        if($test->digital == 0){
+        $pdf->setY(210);
+        $pdf->cell(14);
+        $pdf->Cell(99.8, 6, "Stempel", 0, 0, 'L');
+        $pdf->Ln();
+        }
+        
+            $pdf->setY(210);
+            $pdf->cell(154);
+            $pdf->Cell(99.8, 6, "Unterschrift", 0, 0, 'L');
+            $pdf->Ln();
+
+        $pdf->setY(93.4);
+        $pdf->cell(117.5);
+        $pdf->Cell(99.8, 6, date("d.m.Y"), 0, 0, 'L');
+        $pdf->Ln();
+        $pdf->Image('signature/'.Auth::user()->id.'.png',160,195,-300);
+        $pdf->Output('F', $filename);
+
+           
+        }
+     
+
+     
 
         return redirect('/dashboard');
     }
@@ -297,6 +387,16 @@ class TestController extends Controller
         $pdf->Cell(99.8, 6, date("d.m.Y"), 0, 0, 'L');
         $pdf->Ln();
         $pdf->Image('signature/'.Auth::user()->id.'.png',130,195,-300);
+
+        if($test->price == 'paid'){
+            $pdf->setSourceFile($test->rechnung->filename);
+            $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
+            $pdf->AddPage();
+    
+            $pdf->useTemplate($pageId, 0, 0, 210, 297);
+           }
+
+
         $pdf->Output('F', $test->filename);
 
 
@@ -314,7 +414,22 @@ class TestController extends Controller
     public function destroy($id)
     {
         $test = Test::find($id);
+        if(isset($test->filename) && file_exists($test->filename)){
+            
+            unlink($test->filename);
+        }
+        
+        if(isset($test->rechnung->filename) && file_exists($test->rechnung->filename)){
+            unlink($test->rechnung->filename);
+        }
+
+        if(isset($test->price) && $test->price == 'paid'){
+            $test->rechnung->delete();
+        }
+        
+        
         $test->delete();
+        
         return redirect('/dashboard');
     }
 
@@ -508,6 +623,18 @@ class TestController extends Controller
         $pdf->setY(204);
         $pdf->cell(15);
         $pdf->Cell(99.8, 6, date("d.m.Y"), 0, 0, 'L');
+
+        
+       
+        
+       if($test->price == 'paid'){
+        $pdf->setSourceFile($test->rechnung->filename);
+        $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
+        $pdf->AddPage();
+
+        $pdf->useTemplate($pageId, 0, 0, 210, 297);
+       }
+
         $pdf->Output('F', $filename);
         // PDF Filling END 
 

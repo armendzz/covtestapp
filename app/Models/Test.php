@@ -27,6 +27,7 @@ class Test extends Model
         'laborid',
         'teststelle',
         'phone',
+        'price',
         'email',
         'hersteller',
     ];
@@ -39,6 +40,10 @@ class Test extends Model
     // get user of this test
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function rechnung(){
+        return $this->hasOne(Rechnung::class);
     }
 
 }

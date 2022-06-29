@@ -112,7 +112,7 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="gesundheitsamt" id="andre" value="andre"
                                 required>
-                            <label class="form-check-label" for="asd">Andre</label>
+                            <label class="form-check-label" for="asd">Andere</label>
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
       $("#gname").val('Gesundheitsamt Oberhausen');
       $("#gplz").val('46045');
       $("#gcity").val('Oberhausen');
-      $("#gstrasse").val('Tannenbergstraße 11-13');
+      $("#gstrasse").val('Tannenbergstr. 11-13');
       $("#gtel").val('02088252570');
       $("#gemail").val('Infektionsmeldungen@oberhausen.de');
     }
@@ -179,7 +179,7 @@
       $("#gname").val('Gesundheitsamt Bottrop');
       $("#gplz").val('46236');
       $("#gcity").val('Bottrop');
-      $("#gstrasse").val('Gladbecker Str. 66');
+      $("#gstrasse").val('Gladbeckerstr. 66');
       $("#gtel").val('02041705080');
       $("#gemail").val('infektionsschutz@bottrop.de');
     }
@@ -188,7 +188,7 @@
       $("#gname").val('Gesundheitsamt Duisburg');
       $("#gplz").val('47119');
       $("#gcity").val('Duisburg');
-      $("#gstrasse").val('Ruhrorter Str. 195');
+      $("#gstrasse").val('Ruhrorterstr. 195');
       $("#gtel").val('020394000');
       $("#gemail").val('gesundheitsaufsicht@stadt-Duisburg.de');
     }
@@ -197,7 +197,7 @@
       $("#gname").val('Gesundheitsamt Kreis Wesel');
       $("#gplz").val('46483');
       $("#gcity").val('Wesel');
-      $("#gstrasse").val('Jülicher Str. 6');
+      $("#gstrasse").val('Jülicherstr. 6');
       $("#gtel").val('02812070');
       $("#gemail").val('pocmeldung@kreis-wesel.de');
     }

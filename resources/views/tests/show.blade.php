@@ -6,11 +6,11 @@
         <form class="m-2" action="/tests/{{$test->id}}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
-          <button type="submit" class="btn btn-info">Test Mit Neuen Daten Aktualisieren</button>
+          <button type="submit" class="btn btn-info">Test mit neuen Daten Aktualisieren</button>
         </form>
           
         @endif
-        Test Drucken  
+        Test Drucken
         @if( $test->digital == '1') 
         <form action="/emailerneutsenden/{{$test->id}}" method="post">
         @csrf

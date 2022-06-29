@@ -4,6 +4,7 @@
 /storage/*.key
 /vendor
 /public/testen
+/public/rechnungen
 /public/positivetesten
 .env
 .env.backup

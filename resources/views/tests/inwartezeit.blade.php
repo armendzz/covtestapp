@@ -56,7 +56,7 @@
                          
                                 <form action="/tests/{{ $test->id }}"
                                     method="post">@csrf @method('delete')
-                                       <button type="submit" class="btn btn-outline-danger">Abrechen</button>
+                                       <button type="submit" class="btn btn-outline-danger">Abbrechen</button>
                                    </form>
                               
                         </td>
@@ -75,7 +75,7 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="ergebnis" id="{{$test->id . 'ungultig'}}"
                                     value="8" required>
-                                <label class="form-check-label text-warning" for="{{$test->id . 'ungultig'}}">Ungultig</label>
+                                <label class="form-check-label text-warning" for="{{$test->id . 'ungultig'}}">Ungültig</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="ergebnis" id="{{$test->id . 'negativ'}}"
