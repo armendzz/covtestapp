@@ -78,6 +78,27 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="idnumber" class="col-sm-2 col-form-label col-form-label-lg">PCR-Test veranlasst:</label>
+                    <div class="col-sm-10">
+                        <div class="col-md-12 form-check form-check-inline mb-2">
+                            <input class="form-check-input" type="radio" name="pcrradio" id="ja" value="ja" required>
+                            <label class="form-check-label" for="asd">Ja, erfolgt am:</label>
+                            <input type="text" class="ml-2 form-control form-control-lg"
+                            autocomplete="autocomplete_off_hack_xfr4!k" name="pcrja">
+                        </div>
+                        <div class="col-md-12 form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="pcrradio" id="nein" value="nein"
+                                required>
+                            <label class="form-check-label" for="asd">Nein, Weiterleitung an:</label>
+                            <input type="text" class=" ml-2 form-control form-control-lg"
+                            autocomplete="autocomplete_off_hack_xfr4!k" name="pcrnein">
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="form-group row">
                     <label for="idnumber" class="col-sm-2 col-form-label col-form-label-lg">Personalausweis-Nr.</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control form-control-lg"

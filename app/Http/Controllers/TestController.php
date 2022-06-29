@@ -729,16 +729,18 @@ class TestController extends Controller
         $pdf->Cell(0, 102, $request->gtel, 0, 0, 'L');
         $pdf->Ln();
 
+        $gname = iconv('UTF-8', 'windows-1252', $request->gname);
         $pdf->SetFontSize(12);
         $pdf->setY(7);
         $pdf->cell(3);
-        $pdf->Cell(0, 126, $request->gname, 0, 0, 'L');
+        $pdf->Cell(0, 126, $gname, 0, 0, 'L');
         $pdf->Ln();
 
+        $gstrasse = iconv('UTF-8', 'windows-1252', $request->gstrasse);
         $pdf->SetFontSize(12);
         $pdf->setY(7);
         $pdf->cell(3);
-        $pdf->Cell(0, 149, $request->gstrasse, 0, 0, 'L');
+        $pdf->Cell(0, 149, $gstrasse, 0, 0, 'L');
         $pdf->Ln();
 
         $pdf->SetFontSize(12);
@@ -747,10 +749,11 @@ class TestController extends Controller
         $pdf->Cell(0, 172, $request->gplz, 0, 0, 'L');
         $pdf->Ln();
 
+        $gcity = iconv('UTF-8', 'windows-1252', $request->gcity);
         $pdf->SetFontSize(12);
         $pdf->setY(7);
         $pdf->cell(22);
-        $pdf->Cell(0, 172, $request->gcity, 0, 0, 'L');
+        $pdf->Cell(0, 172, $gcity, 0, 0, 'L');
         $pdf->Ln();
 
         $zentrumname = iconv('UTF-8', 'windows-1252', env('APP_NAME'));
@@ -914,18 +917,62 @@ class TestController extends Controller
         $pdf->Cell(0, 20, $kundenstr, 0, 0, 'L');
         $pdf->Ln();
 
+        // $pdf->SetFontSize(10);
+        // $pdf->setY(205);
+        // $pdf->cell(10);
+        // $pdf->Cell(0, 20, 'X', 0, 0, 'L');
+        // $pdf->Ln();
+
+        // $kundenstr = iconv('UTF-8', 'windows-1252', 'das Gesundheitsamt');
+        // $pdf->SetFontSize(10);
+        // $pdf->setY(204);
+        // $pdf->cell(96);
+        // $pdf->Cell(0, 20, $kundenstr, 0, 0, 'L');
+        // $pdf->Ln();
+
+        if(Auth::user()->teststelle == '36137'){
+            $pcrradioja = date("d.m.Y");
+        } else {
+            $pcrradioja = $request['pcrja'];
+        }
+
+        if(Auth::user()->teststelle == '36137'){
+            $pcrradionein = iconv('UTF-8', 'windows-1252', 'das Gesundheitsamt');
+        } else {
+            $pcrradionein = $request['pcrnein'];
+        }
+
+        if($request['pcrradio'] == 'ja'){
+            $pdf->SetFontSize(10);
+            $pdf->setY(199.5);
+            $pdf->cell(10);
+            $pdf->Cell(0, 20, 'X', 0, 0, 'L');
+            $pdf->Ln();
+
+            $pdf->SetFontSize(10);
+            $pdf->setY(198);
+            $pdf->cell(40);
+            $pcr =  iconv('UTF-8', 'windows-1252', $pcrradioja);
+            $pdf->Cell(0, 20, $pcr, 0, 0, 'L');
+            $pdf->Ln();
+        }
+
+        if($request['pcrradio'] == 'nein'){
+
         $pdf->SetFontSize(10);
         $pdf->setY(205);
         $pdf->cell(10);
         $pdf->Cell(0, 20, 'X', 0, 0, 'L');
         $pdf->Ln();
 
-        $kundenstr = iconv('UTF-8', 'windows-1252', 'das Gesundheitsamt');
+        $kundenstr = iconv('UTF-8', 'windows-1252', $pcrradionein);
         $pdf->SetFontSize(10);
         $pdf->setY(204);
         $pdf->cell(96);
         $pdf->Cell(0, 20, $kundenstr, 0, 0, 'L');
         $pdf->Ln();
+
+        }
 
         $pdf->Output('F', $filename);
 
