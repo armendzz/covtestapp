@@ -78,7 +78,19 @@
                     <div class="card col-md-3 m-3 positive-card">
                         <a href="/positive">
                             <div class="card-body dashboard-cards">
-                                <h1 class="text-center">{{$positivheute}}</h1>
+                                <h1 class="text-center">{{$positivheutefree + $positivheutepaid}}</h1>
+                                <div class="flex">
+                                    <h2 class="text-center mx-2  p-2 col-span-5">
+                                        {{ $positivheutefree }}
+                                        <br>
+                                        <span class="text-sm">Kostenlos</span>
+                                    </h2>
+                                    <h2 class="text-center mx-2  p-2 col-span-6">
+                                        {{ $positivheutepaid }}
+                                        <br>
+                                        <span class="text-sm">Kostenpflichtig</span>
+                                    </h2>
+                                </div>
                                 Positive Fälle
                             </div>
                         </a>

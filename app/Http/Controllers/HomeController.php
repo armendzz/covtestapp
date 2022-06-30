@@ -14,8 +14,9 @@ class HomeController extends Controller
         ->get();
         $testsheutefree = Test::where('teststelle', '=', Auth::user()->teststelle)->whereDate('created_at', Carbon::today())->where('price', '=', 'free')->get();
         $testsheutepaid = Test::where('teststelle', '=', Auth::user()->teststelle)->whereDate('created_at', Carbon::today())->where('price', '=', 'paid')->get();
-        $positivheute = Test::where('teststelle', '=', Auth::user()->teststelle)->where('ergebnis', '=', '7' )->whereDate('created_at', Carbon::today())->get();
-        
-        return view('dashboard', ['testhute' => count($testsheutefree) + count($testsheutepaid), 'thismonth' => count($testthismonth), 'positivheute' => count($positivheute), 'testsheutefree' => count($testsheutefree), 'testsheutepaid' => count($testsheutepaid)]);
+        $positivheutefree = Test::where('teststelle', '=', Auth::user()->teststelle)->where('ergebnis', '=', '7' )->whereDate('created_at', Carbon::today())->where('price', '=', 'free')->get();
+        $positivheutepaid = Test::where('teststelle', '=', Auth::user()->teststelle)->where('ergebnis', '=', '7' )->whereDate('created_at', Carbon::today())->where('price', '=', 'paid')->get();
+
+        return view('dashboard', ['testhute' => count($testsheutefree) + count($testsheutepaid), 'thismonth' => count($testthismonth), 'positivheutefree' => count($positivheutefree), 'positivheutepaid' => count($positivheutepaid), 'testsheutefree' => count($testsheutefree), 'testsheutepaid' => count($testsheutepaid)]);
     }
 }
