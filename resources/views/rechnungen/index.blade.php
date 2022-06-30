@@ -19,6 +19,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th scope="col">TestNr</th>
                                 <th scope="col">Kunde/Kundin</th>
                                 <th scope="col">Rechnung NR</th>
                                 <th scope="col">Datum & Uhrzeit</th>
@@ -29,6 +30,7 @@
                         <tbody>
                             @foreach ($rechnungen as $rechnung)
                                 <tr>
+                                    <td>{{ $rechnung->test->test_nr }}</td>
                                     <th scope="row">{{ $rechnung->test->fn }} {{ $rechnung->test->ln }} 
                                        
                                       

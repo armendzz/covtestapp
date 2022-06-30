@@ -77,9 +77,12 @@
                     <script>
                         function kosten(){
                             let price = document.querySelector('input[name="kosten"]:checked').value;
-                            document.getElementById('btnemail').disabled = false;
-                            document.getElementById('btndrucken').disabled = false;
-                            document.getElementById('pricedrucken').value = price;
+			    document.getElementById('btndrucken').disabled = false;
+                            
+			   document.getElementById('pricedrucken').value = price;
+                            
+			    document.getElementById('btnemail').disabled = false;
+			    
                             document.getElementById('priceemail').value = price;
                             
                         }
