@@ -491,7 +491,7 @@ class TestController extends Controller
         $pdf->SetFontSize(10);
         $pdf->setY(56);
         $pdf->cell(82);
-        $pdf->Cell(97, 12, '', 1, 0, 'L');
+        $pdf->Cell(97, 12, '', 0, 0, 'L');
         $pdf->Ln();
         $pdf->setY(52.4);
         $pdf->cell(82);
@@ -511,23 +511,23 @@ class TestController extends Controller
         $pdf->Cell(97, 12, 'Teststellen-Nr '.$teststelle, 0, 0, 'L');
         $pdf->Ln();
         $name = iconv('UTF-8', 'windows-1252', $name);
-        $pdf->setY(71.5);
+        $pdf->setY(73);
         $pdf->cell(62.7);
-        $pdf->Cell(124, 6, $name, 1, 0, 'L');
+        $pdf->Cell(124, 6, $name, 0, 0, 'L');
         $pdf->Ln();
-        $pdf->setY(79.5);
+        $pdf->setY(80.5);
         $pdf->cell(62.7);
         $address = iconv('UTF-8', 'windows-1252', $test->addresse);
-        $pdf->Cell(124, 6, $address, 1, 0, 'L');
+        $pdf->Cell(124, 6, $address, 0, 0, 'L');
         $pdf->Ln();
-        $pdf->setY(87.5);
+        $pdf->setY(88);
         $pdf->cell(62.7);
-        $pdf->Cell(124, 6, date("d.m.Y", strtotime($test->dob)), 1, 0, 'L');
+        $pdf->Cell(124, 6, date("d.m.Y", strtotime($test->dob)), 0, 0, 'L');
         $pdf->Ln();
         //id number
-        $pdf->setY(95.4);
-        $pdf->cell(81);
-        $pdf->Cell(105.8, 6, $test->kunde->idnumber, 1, 0, 'L');
+        $pdf->setY(95.8);
+        $pdf->cell(80);
+        $pdf->Cell(105.8, 6, $test->kunde->idnumber, 0, 0, 'L');
         $pdf->Ln();
 
         //tel
@@ -549,56 +549,68 @@ class TestController extends Controller
         $pdf->Ln();
         $pdf->SetFontSize(10);
         $pdf->setY(103.4);
-        $pdf->cell(81);
-        $pdf->Cell(105.8, 6, $test->email, 1, 0, 'L');
+        $pdf->cell(78.5);
+        $pdf->Cell(99, 6, $test->email, 1, 0, 'L');
         $pdf->Ln();
 
 
         $pdf->setY(118);
         $pdf->cell(62.7);
-        $pdf->Cell(124, 6, 'COVID-19 Antigen Rapid Test', 1, 0, 'L');
+        $pdf->Cell(124, 6, 'COVID-19 Antigen Rapid Test', 0, 0, 'L');
         $pdf->Ln();
 
         $pdf->setY(126);
         $pdf->cell(62.7);
         $hersteller = iconv('UTF-8', 'windows-1252', $test->hersteller);
-        $pdf->Cell(124, 6, $hersteller, 1, 0, 'L');
+        $pdf->Cell(124, 6, $hersteller, 0, 0, 'L');
         $pdf->Ln();
 
         $pdf->setY(134);
         $pdf->cell(87);
-	    $pdf->Cell(99.8, 6, date("d.m.Y  -  H:i", strtotime($test->created_at)), 1, 0, 'L');
+	    $pdf->Cell(99.8, 6, date("d.m.Y  -  H:i", strtotime($test->created_at)), 0, 0, 'L');
 	    $pdf->Ln();
 
         $pdf->setY(142);
         $pdf->cell(62.7);
 	$username = iconv('UTF-8', 'windows-1252', Auth::user()->name);
-	$pdf->Cell(124, 6, $username, 1, 0, 'L');
+	$pdf->Cell(124, 6, $username, 0, 0, 'L');
         $pdf->Ln();
 
-        $pdf->setY(163.5);
-        $pdf->cell(41.5);
-        $pdf->SetFontSize(20);
-        $pdf->Cell(5, 6, 'X', 0, 0, 'L');
-        $pdf->Ln();
+        if($test->price == "free"){
+            $pdf->setY(163);
+            $pdf->cell(45);
+            $pdf->SetFontSize(20);
+            $pdf->Cell(5, 6, 'X', 0, 0, 'L');
+            $pdf->Ln();
+        }
+
+
+        if($test->price == "paid"){
+            $pdf->setY(163);
+            $pdf->cell(168);
+            $pdf->SetFontSize(20);
+            $pdf->Cell(5, 6, 'X', 0, 0, 'L');
+            $pdf->Ln();
+        }
+        
 
          if ($test->ergebnis == 7) {
             //if positiv
-            $pdf->setY(181);
+            $pdf->setY(182);
             $pdf->cell(58);
             $pdf->SetFontSize(20);
             $pdf->Cell(5, 6, 'X', 0, 0, 'L');
             $pdf->Ln();
         } else if ($test->ergebnis == 6) {
             //if negativ
-            $pdf->setY(181);
+            $pdf->setY(182);
             $pdf->cell(122.7);
             $pdf->SetFontSize(20);
             $pdf->Cell(5, 6, 'X', 0, 0, 'L');
             $pdf->Ln();
         } else if ($test->ergebnis == 8) {
             // if ungultig
-            $pdf->setY(181);
+            $pdf->setY(182);
             $pdf->cell(133);
             $pdf->SetFontSize(20);
             $pdf->Cell(5, 6, 'Ungultig', 0, 0, 'L');
@@ -638,7 +650,7 @@ class TestController extends Controller
         $pdf->Output('F', $filename);
         // PDF Filling END 
 
-
+      
         // if kunde want result per email
          if($test->digital == '1'){
             $to_name = $emailnamekunde;
