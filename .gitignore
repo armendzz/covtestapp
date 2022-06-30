@@ -5,6 +5,8 @@
 /vendor
 /public/testen
 /public/rechnungen
+/public/signature
+/public/rechnung.pdf
 /public/positivetesten
 .env
 .env.backup
