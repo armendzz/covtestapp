@@ -60,7 +60,11 @@
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" onclick="kosten()"  name="kosten" value="paid" id="paid">
-                            <label class="form-check-label text-lg text-danger" for="paid">Kostenpflicht</label>
+                            <label class="form-check-label text-lg text-warning" for="paid">Kosten: 3€</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" onclick="kosten()"  name="kosten" value="10" id="10">
+                            <label class="form-check-label text-lg text-danger" for="10">Kosten: 10€</label>
                         </div>
                       
                     </div>

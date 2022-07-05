@@ -7,6 +7,7 @@
 /public/rechnungen
 /public/signature
 /public/rechnung.pdf
+/public/rechnung10.pdf
 /public/positivetesten
 .env
 .env.backup

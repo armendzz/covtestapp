@@ -81,7 +81,7 @@ class TestController extends Controller
         // Create test and send user to dashboard
         $test = Test::Create($testdata);
 
-        if($request->price == 'paid'){
+        if($request->price == 'paid' || $request->price == '10'){
             $rechnung = new Rechnung;
 
             $rechnungDb = Rechnung::whereDate('created_at', Carbon::today())->get();
@@ -112,8 +112,12 @@ class TestController extends Controller
             $rechnung->save();
 
             $pdf = new Fpdi();
-
-        $pageCount = $pdf->setSourceFile('rechnung.pdf');
+        if($request->price == 'paid'){
+            $pageCount = $pdf->setSourceFile('rechnung.pdf');
+        }
+        if($request->price == '10'){
+            $pageCount = $pdf->setSourceFile('rechnung10.pdf');
+        }
         $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
 
         $pdf->addPage();
@@ -388,13 +392,13 @@ class TestController extends Controller
         $pdf->Ln();
         $pdf->Image('signature/'.Auth::user()->id.'.png',130,195,-300);
 
-        if($test->price == 'paid'){
+        if($test->price == 'paid' || $test->price == '10'){
             $pdf->setSourceFile($test->rechnung->filename);
             $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
             $pdf->AddPage();
     
             $pdf->useTemplate($pageId, 0, 0, 210, 297);
-           }
+        }
 
 
         $pdf->Output('F', $test->filename);
@@ -423,7 +427,7 @@ class TestController extends Controller
             unlink($test->rechnung->filename);
         }
 
-        if(isset($test->price) && $test->price == 'paid'){
+        if(isset($test->price) && $test->price == 'paid' || $test->price == '10'){
             $test->rechnung->delete();
         }
         
@@ -576,7 +580,7 @@ class TestController extends Controller
 	$pdf->Cell(124, 6, $username, 0, 0, 'L');
         $pdf->Ln();
 
-        if($test->price == "free"){
+        if($test->price == "free" || $test->price == "paid"){
             $pdf->setY(163);
             $pdf->cell(45);
             $pdf->SetFontSize(20);
@@ -585,7 +589,7 @@ class TestController extends Controller
         }
 
 
-        if($test->price == "paid"){
+        if($test->price == "10"){
             $pdf->setY(163);
             $pdf->cell(168);
             $pdf->SetFontSize(20);
@@ -639,7 +643,7 @@ class TestController extends Controller
         
        
         
-       if($test->price == 'paid'){
+       if($test->price == 'paid' || $test->price == '10'){
         $pdf->setSourceFile($test->rechnung->filename);
         $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
         $pdf->AddPage();

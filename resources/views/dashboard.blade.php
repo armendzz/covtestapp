@@ -75,7 +75,7 @@
                 <div class="row justify-content-center">
 
                     {{-- Positive falle card --}}
-                    <div class="card col-md-3 m-3 positive-card">
+                    <div class="card col-md-5 m-3 positive-card">
                         <a href="/positive">
                             <div class="card-body dashboard-cards">
                                 <h1 class="text-center">{{$positivheutefree + $positivheutepaid}}</h1>
@@ -88,7 +88,13 @@
                                     <h2 class="text-center mx-2  p-2 col-span-6">
                                         {{ $positivheutepaid }}
                                         <br>
-                                        <span class="text-sm">Kostenpflichtig</span>
+                                        <span class="text-sm">Kostenpflichtig 3E</span>
+                                    </h2>
+                                    
+                                    <h2 class="text-center mx-2  p-2 col-span-6">
+                                        {{ $positivheutepaidten }}
+                                        <br>
+                                        <span class="text-sm">Kostenpflichtig 10E</span>
                                     </h2>
                                 </div>
                                 Positive Fälle
@@ -97,7 +103,7 @@
                     </div>
 
                     {{-- Today tests card --}}
-                    <div class="card col-md-3 m-3 stats-card">
+                    <div class="card col-md-5 m-3 stats-card">
                         <div class="card-body dashboard-cards">
                             <h1 class="text-center">{{$testhute}}</h1>
                             <div class="flex">
@@ -109,7 +115,12 @@
                             <h2 class="text-center mx-2  p-2 col-span-6">
                                 {{ $testsheutepaid }}
                                 <br>
-                                <span class="text-sm">Kostenpflichtig</span>
+                                <span class="text-sm">Kostenpflichtig 3E</span>
+                            </h2>
+                            <h2 class="text-center mx-2  p-2 col-span-6">
+                                {{ $testsheutepaidten }}
+                                <br>
+                                <span class="text-sm">Kostenpflichtig 10E</span>
                             </h2>
                         </div>
                             
@@ -117,8 +128,41 @@
                         </div>
                     </div>
 
+            
+                    
+                </div>
+                <div class="row justify-content-center">
+
+                    {{-- Positive falle card --}}
+                    <div class="card col-md-5 m-3 positive-card">
+                        <a href="/positive">
+                            <div class="card-body dashboard-cards">
+                                <h1 class="text-center">{{$positivheutefree + $positivheutepaid}}</h1>
+                                <div class="flex">
+                                    <h2 class="text-center mx-2  p-2 col-span-5">
+                                        {{ $positivheutefree }}
+                                        <br>
+                                        <span class="text-sm">Kostenlos</span>
+                                    </h2>
+                                    <h2 class="text-center mx-2  p-2 col-span-6">
+                                        {{ $positivheutepaid }}
+                                        <br>
+                                        <span class="text-sm">Kostenpflichtig 3E</span>
+                                    </h2>
+                                    <h2 class="text-center mx-2  p-2 col-span-6">
+                                        {{ $positivheutepaidten }}
+                                        <br>
+                                        <span class="text-sm">Kostenpflichtig 10E</span>
+                                    </h2>
+                                </div>
+                                Positive Fälle Diesen Monat
+                            </div>
+                        </a>
+                    </div>
+
+
                     {{-- This month tests card --}}
-                    <div class="card col-md-3 m-3 stats-card">
+                    <div class="card col-md-5 m-3 stats-card">
                         <div class="card-body dashboard-cards">
                             <h1 class="text-center">{{$thismonth}}</h1>
                             Diesen Monat durchgeführte Tests
