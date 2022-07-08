@@ -41,7 +41,7 @@
                                             <tr>
                                                 <th scope="row">{{ $test->ln }}, {{ $test->fn }} <br>Geb:
                                                     {{ $test->dob }}</th>
-                                                <td>{{ $test->user->name }}</td>
+                                                <td>@if(isset($test->user->name)){{ $test->user->name }}@endif</td>
                                                 <td>{{ $test->created_at }}</td>
                                                 <td>
                                                     @if ($test->ergebnis == 6)
