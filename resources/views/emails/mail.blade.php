@@ -1,5 +1,5 @@
 <p>
-    Sehr geehrter Kunde/Sehr geehrte Kundin,
+    Sehr geehrte/r Kundin/e,
 </p>
 <p>im Anhang finden Sie ihr Testergebnis. </p>
 <br>
