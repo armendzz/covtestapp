@@ -227,14 +227,16 @@
 document.getElementById('pricedrucken').value = '13';
 
 
-document.getElementById('btnemail').disabled = false;
-document.getElementById('priceemail').value = '13';
 
                            
                                 grundText = 'Ohne Grund	'
                             
    
                                 document.getElementById('ausgewahlteGrund').innerHTML = grundText;
+
+                                
+document.getElementById('btnemail').disabled = false;
+document.getElementById('priceemail').value = '13';
                         }
 
                         function kosten() {
@@ -244,8 +246,7 @@ document.getElementById('priceemail').value = '13';
                             document.getElementById('pricedrucken').value = price;
 
                             
-                            document.getElementById('btnemail').disabled = false;
-                            document.getElementById('priceemail').value = price;
+                           
 
                             const dialog = document.getElementById('grundkostenloss');
                             const dialog3 = document.getElementById('grund3');
@@ -311,6 +312,9 @@ document.getElementById('priceemail').value = '13';
                             }
    
                                 document.getElementById('ausgewahlteGrund').innerHTML = grundText;
+
+                                document.getElementById('btnemail').disabled = false;
+                            document.getElementById('priceemail').value = price;
                         }
 
 
