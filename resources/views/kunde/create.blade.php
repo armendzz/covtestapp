@@ -113,6 +113,14 @@
                     </div>
                 </div>
 
+                  {{-- notice input --}}
+                  <div class="form-group row">
+                    <label for="idnumber" class="col-sm-2 col-form-label col-form-label-lg">Notizen</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control form-control-lg" name="notice" id="notice" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+
                 {{-- Complete Address hidden input. This input will autofill from Javascript --}}
                 <input type="hidden" id="anschrift" name="addresse" value="">
 

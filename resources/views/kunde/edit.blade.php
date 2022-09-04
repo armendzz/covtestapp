@@ -96,6 +96,14 @@
                     </div>
                 </div>
 
+                   {{-- notice input --}}
+                   <div class="form-group row">
+                    <label for="idnumber" class="col-sm-2 col-form-label col-form-label-lg">Notizen</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control form-control-lg" name="notice" id="notice" cols="30" rows="10">{{ $kunde->notice }}</textarea>
+                    </div>
+                </div>
+
                 {{-- submit button --}}
                 <div class="form-group row justify-content-center">
                     <button type="submit" class="btn btn-lg btn-info py-3 px-5"> Daten aktualisieren</button>

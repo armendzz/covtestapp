@@ -110,7 +110,7 @@
 
     </div>
     <div class="container">
-        <div class="card">
+        <div class="card mb-6">
 
             {{-- Kudendaten bearbeiten button --}}
             <div class="card-header d-flex justify-content-between">
@@ -144,6 +144,11 @@
                     <li class="client-li">
                         <div class="client-att">Personalausweis-Nr:</div>
                         <div class="client-data"> {{ $kunde->idnumber }} </div>
+                    </li>
+                    <li class="client-li">
+                        <div class="client-att ">Notize:</div>
+                        <textarea readonly class="form-control mt-2 mb-2 form-control-lg" name="notice" id="notice" cols="30" rows="10">{{ $kunde->notice }}</textarea>
+                     
                     </li>
                 </ul>
 

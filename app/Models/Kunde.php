@@ -18,6 +18,7 @@ class Kunde extends Model
         'idnumber',
         'email',
         'phone',
+        'notice'
     ];
 
     // get all tests that belongs to kunde

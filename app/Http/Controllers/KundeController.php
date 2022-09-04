@@ -56,6 +56,7 @@ class KundeController extends Controller
             'addresse' => ['required', 'string'],
             'phone' => ['nullable', 'string'],
             'idnumber' => ['nullable', 'string'],
+            'notice' => ['nullable', 'string'],
         ])->validate();
 
         // Check if kunde alerdy is in database
@@ -74,6 +75,7 @@ class KundeController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'idnumber' => $request->idnumber,
+                'notice' => $request->notice,
             ]);
 
             return redirect('kunde/' . $client->id);
@@ -124,6 +126,7 @@ class KundeController extends Controller
             'addresse' => ['required', 'string'],
             'phone' => ['nullable', 'string'],
             'idnumber' => ['nullable', 'string'],
+            'notice' => ['nullable', 'string'],
         ])->validate();
 
 
@@ -137,6 +140,7 @@ class KundeController extends Controller
              'email' => $request->email,
              'phone' => $request->phone,
              'idnumber' => $request->idnumber,
+             'notice' => $request->notice,
         ];
 
         $kunde->update($data);
