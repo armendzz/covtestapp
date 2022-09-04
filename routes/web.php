@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KundeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\RechnungController;
+use App\Http\Controllers\StatsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,9 @@ Route::resource('tests', TestController::class, [
     'names' => [
         'index' => 'test-suchen',
         ]])->middleware('auth');
+
+// Stats Routes - only for loggedin user 
+Route::middleware(['auth:sanctum', 'verified'])->get('/stats', [StatsController::class, 'index'])->name('allstats');
 
 // Rechnung Routes - only for loggedin user 
 Route::middleware(['auth:sanctum', 'verified'])->get('/rechnung', [App\Http\Controllers\RechnungController::class, 'index'])->name('rechnungenindex');

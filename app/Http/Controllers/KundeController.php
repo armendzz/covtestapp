@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kunde;
+use App\Models\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -153,6 +154,13 @@ class KundeController extends Controller
     public function destroy($id)
     {
         $kunde = Kunde::find($id);
+
+        $testsInWarteZeit = Test::where('kunde_id', '=', $kunde->id)->where('ergebnis', '=', NULL)->get();
+        
+        foreach($testsInWarteZeit as $test){
+            $test->delete();
+        }
+
         $kunde->delete();
         return redirect('/dashboard');
     }

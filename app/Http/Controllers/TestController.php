@@ -81,7 +81,7 @@ class TestController extends Controller
         // Create test and send user to dashboard
         $test = Test::Create($testdata);
 
-        if($request->price == 'paid' || $request->price == '10'){
+        if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12" || $request->price == '13'){
             $rechnung = new Rechnung;
 
             $rechnungDb = Rechnung::whereDate('created_at', Carbon::today())->get();
@@ -112,10 +112,10 @@ class TestController extends Controller
             $rechnung->save();
 
             $pdf = new Fpdi();
-        if($request->price == 'paid'){
+        if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12"){
             $pageCount = $pdf->setSourceFile('rechnung.pdf');
         }
-        if($request->price == '10'){
+        if($request->price == '13'){
             $pageCount = $pdf->setSourceFile('rechnung10.pdf');
         }
         $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
@@ -187,10 +187,13 @@ class TestController extends Controller
         $test = Test::find($id);
         $kunde = Kunde::find($test->kunde_id);
         
-        // check if any data is updated in kunde table
-        if($test->fn != $kunde->fn || $test->ln != $kunde->ln || $test->addresse != $kunde->addresse || $test->dob != $kunde->dob || $test->email != $kunde->email || $test->phone != $kunde->phone ){
-            return view('tests/show', ['test' => $test, 'update' => true]);
+        if(isset($kunde)){
+            if($test->fn != $kunde->fn || $test->ln != $kunde->ln || $test->addresse != $kunde->addresse || $test->dob != $kunde->dob || $test->email != $kunde->email || $test->phone != $kunde->phone ){
+                return view('tests/show', ['test' => $test, 'update' => true]);
+            }
         }
+        // check if any data is updated in kunde table
+     
 
         return view('tests/show', ['test' => $test]);
     }
@@ -218,6 +221,7 @@ class TestController extends Controller
         $test = Test::find($id);
         $kunde = Kunde::find($test->kunde_id);
 
+        
         $data = [
             'fn' => $kunde->fn,
              'ln' => $kunde->ln,
@@ -392,7 +396,7 @@ class TestController extends Controller
         $pdf->Ln();
         $pdf->Image('signature/'.Auth::user()->id.'.png',130,195,-300);
 
-        if($test->price == 'paid' || $test->price == '10'){
+        if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12" || $test->price == '13'){
             $pdf->setSourceFile($test->rechnung->filename);
             $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
             $pdf->AddPage();
@@ -427,7 +431,7 @@ class TestController extends Controller
             unlink($test->rechnung->filename);
         }
 
-        if(isset($test->price) && $test->price == 'paid' || $test->price == '10'){
+        if(isset($test->price) && $test->price == '13' || $test->price == '13'){
             $test->rechnung->delete();
         }
         
@@ -580,7 +584,7 @@ class TestController extends Controller
 	$pdf->Cell(124, 6, $username, 0, 0, 'L');
         $pdf->Ln();
 
-        if($test->price == "free" || $test->price == "paid"){
+        if($test->price == "1" || $test->price == "2" || $test->price == "3" || $test->price == "4" || $test->price == "5" || $test->price == "10" || $test->price == "11" ||  $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12"){
             $pdf->setY(163);
             $pdf->cell(45);
             $pdf->SetFontSize(20);
@@ -589,7 +593,7 @@ class TestController extends Controller
         }
 
 
-        if($test->price == "10"){
+        if($test->price == "13"){
             $pdf->setY(163);
             $pdf->cell(168);
             $pdf->SetFontSize(20);
@@ -643,7 +647,7 @@ class TestController extends Controller
         
        
         
-       if($test->price == 'paid' || $test->price == '10'){
+       if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12" || $test->price == '13'){
         $pdf->setSourceFile($test->rechnung->filename);
         $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
         $pdf->AddPage();

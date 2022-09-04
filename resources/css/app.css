@@ -1,8 +1,17 @@
-@import 'tailwindcss/base';
+/* @import 'tailwindcss/base';
 @import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import 'tailwindcss/utilities'; */
+
+@tailwind base;
+@tailwind components;
 
 
+@layer components {
+    .suche-card {
+      @apply  m-3 bg-cyan-600 text-white hover:bg-blue-300  duration-300 ease-in-out hover:text-cyan-900;
+    }
+  }
+  @tailwind utilities;
 .client {
     border-bottom: 1px solid rgba(121, 120, 120, 0.603);
     padding: 5px;
