@@ -377,7 +377,7 @@ class TestController extends Controller
             $pdf->Cell(5, 6, 'Ungultig', 0, 0, 'L');
             $pdf->Ln();
         }
-        if($test->digital == '1'){
+    //    if($test->digital == '1'){
             $pdf->SetFontSize(10);
             $pdf->setY(200);
             $pdf->cell(45);
@@ -387,7 +387,7 @@ class TestController extends Controller
             $pdf->cell(45);
             $pdf->Cell(99.8, 6, iconv('UTF-8', 'windows-1252', "und ist ohne Stempel gültig"), 0, 0, 'L');
             $pdf->Ln();
-        }
+     //   }
 
         $pdf->SetFontSize(15);
         $pdf->setY(204);
@@ -501,10 +501,30 @@ class TestController extends Controller
         $pdf->cell(82);
         $pdf->Cell(97, 12, '', 0, 0, 'L');
         $pdf->Ln();
+        // $pdf->setY(52.4);
+        // $pdf->cell(82);
+        // $zentrumname = iconv('UTF-8', 'windows-1252', env('APP_NAME'));
+        // $pdf->Cell(97, 12, $zentrumname, 0, 0, 'L');
+        // $pdf->Ln();
+        // $pdf->setY(56);
+        // $pdf->cell(82);
+        // $address = iconv('UTF-8', 'windows-1252', Auth::user()->addresse);
+
+        // $pdf->Cell(97, 12, $address, 0, 0, 'L');
+        // $pdf->Ln();
+        // $pdf->setY(60);
+        // $pdf->cell(82);
+        // $teststelle = iconv('UTF-8', 'windows-1252', Auth::user()->teststelle);
+
+        // $pdf->Cell(97, 12, 'Teststellen-Nr '.$teststelle, 0, 0, 'L');
+        // $pdf->Ln();
+        $teststelle = iconv('UTF-8', 'windows-1252', Auth::user()->teststelle);
+
+     
         $pdf->setY(52.4);
         $pdf->cell(82);
         $zentrumname = iconv('UTF-8', 'windows-1252', env('APP_NAME'));
-        $pdf->Cell(97, 12, $zentrumname, 0, 0, 'L');
+        $pdf->Cell(97, 12, $zentrumname . ' / Teststellen-Nr '.$teststelle, 0, 0, 'L');
         $pdf->Ln();
         $pdf->setY(56);
         $pdf->cell(82);
@@ -515,9 +535,9 @@ class TestController extends Controller
         $pdf->setY(60);
         $pdf->cell(82);
         $teststelle = iconv('UTF-8', 'windows-1252', Auth::user()->teststelle);
-
-        $pdf->Cell(97, 12, 'Teststellen-Nr '.$teststelle, 0, 0, 'L');
+        $pdf->Cell(97, 12, 'Tel: 0157/34106180 E-mail: info@testzentrum-hessler.de', 0, 0, 'L');
         $pdf->Ln();
+
         $name = iconv('UTF-8', 'windows-1252', $name);
         $pdf->setY(73);
         $pdf->cell(62.7);
@@ -624,7 +644,7 @@ class TestController extends Controller
             $pdf->Cell(5, 6, 'Ungultig', 0, 0, 'L');
             $pdf->Ln();
         }
-        if($test->digital == '1'){
+      //  if($test->digital == '1'){
             $pdf->SetFontSize(10);
             $pdf->setY(200);
             $pdf->cell(45);
@@ -634,7 +654,7 @@ class TestController extends Controller
             $pdf->cell(45);
             $pdf->Cell(99.8, 6, iconv('UTF-8', 'windows-1252', "und ist ohne Stempel gültig"), 0, 0, 'L');
             $pdf->Ln();
-        }
+     //   }
       
         $pdf->Ln();
         $pdf->Image('signature/'.Auth::user()->id.'.png',130,195,-300);
