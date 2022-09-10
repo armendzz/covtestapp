@@ -81,7 +81,7 @@ class TestController extends Controller
         // Create test and send user to dashboard
         $test = Test::Create($testdata);
 
-        if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12" || $request->price == '13'){
+        if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $request->price == '13'){
             $rechnung = new Rechnung;
 
             $rechnungDb = Rechnung::whereDate('created_at', Carbon::today())->get();
@@ -112,7 +112,7 @@ class TestController extends Controller
             $rechnung->save();
 
             $pdf = new Fpdi();
-        if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12"){
+        if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9"){
             $pageCount = $pdf->setSourceFile('rechnung.pdf');
         }
         if($request->price == '13'){
@@ -396,7 +396,7 @@ class TestController extends Controller
         $pdf->Ln();
         $pdf->Image('signature/'.Auth::user()->id.'.png',130,195,-300);
 
-        if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12" || $test->price == '13'){
+        if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == '13'){
             $pdf->setSourceFile($test->rechnung->filename);
             $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
             $pdf->AddPage();
@@ -647,7 +647,7 @@ class TestController extends Controller
         
        
         
-       if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12" || $test->price == '13'){
+       if( $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == '13'){
         $pdf->setSourceFile($test->rechnung->filename);
         $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
         $pdf->AddPage();
