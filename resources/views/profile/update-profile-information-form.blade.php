@@ -62,30 +62,30 @@
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Email') }}" />
-            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
+            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" disabled />
             <x-jet-input-error for="email" class="mt-2" />
         </div>
 
           <!-- Addresse -->
-          <div class="col-span-6 sm:col-span-4">
+          <!-- <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="addresse" value="{{ __('Addresse') }}" />
             <x-jet-input id="addresse" type="text" class="mt-1 block w-full" wire:model.defer="state.addresse" />
             <x-jet-input-error for="addresse" class="mt-2" />
-        </div>
+        </div> -->
 
           <!-- Teststelle -->
-          <div class="col-span-6 sm:col-span-4">
+          <!-- <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="teststelle" value="{{ __('Teststelle NR') }}" />
             <x-jet-input id="teststelle" type="text" class="mt-1 block w-full" wire:model.defer="state.teststelle" />
             <x-jet-input-error for="teststelle" class="mt-2" />
-        </div>
+        </div> -->
 
           <!-- Labor ID -->
-          <div class="col-span-6 sm:col-span-4">
+          <!-- <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="laborid" value="{{ __('Labor Id') }}" />
             <x-jet-input id="laborid" type="text" class="mt-1 block w-full" wire:model.defer="state.laborid" />
             <x-jet-input-error for="laborid" class="mt-2" />
-        </div>
+        </div> -->
 
          <!-- Labor ID -->
          <div class="col-span-6 sm:col-span-4">

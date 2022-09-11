@@ -82,6 +82,91 @@ class KundeController extends Controller
         }
     }
 
+
+    public function import(Request $request)
+    {
+
+        
+      
+        $Essen_Alle_Daten = $json['Essen_Alle_Daten'];
+     
+            // foreach($Essen_Alle_Daten as $kunde){
+
+            
+            //         $gebjahr = explode('/',$kunde['Geburtsdatum']);
+
+            //         if(count($gebjahr) == 3){
+            //             if(strlen($gebjahr[1]) == 1){
+               
+            //                 $gebjahr[1] = '0'.$gebjahr[1];
+            //             }
+            //             if(strlen($gebjahr[0]) == 1){
+                         
+            //                 $gebjahr[0] = '0'.$gebjahr[0];
+            //             }
+            //             if($gebjahr[2][0] == 0 || $gebjahr[2][0] == 1){
+            //                 $gebjahr[2] = '20' . $gebjahr[2];
+                                                
+            //                 $kunde['Geburtsdatum'] = $gebjahr[1] . '-'. $gebjahr[0] .'-'. $gebjahr[2];
+            //             } else {
+            //                 $gebjahr[2] = '19' . $gebjahr[2];
+                        
+            //                 $kunde['Geburtsdatum'] = $gebjahr[1] . '-'. $gebjahr[0] .'-'. $gebjahr[2];
+                        
+                         
+            //             }
+
+            //         }
+
+            //         $gebjahr = explode('.',$kunde['Geburtsdatum']);
+                    
+            //         if(count($gebjahr) == 3){
+            //             if(strlen($gebjahr[1]) == 1){
+               
+            //                 $gebjahr[1] = '0'.$gebjahr[1];
+            //             }
+            //             if(strlen($gebjahr[0]) == 1){
+                         
+            //                 $gebjahr[0] = '0'.$gebjahr[0];
+            //             }
+            //             if($gebjahr[2][0] == 0 || $gebjahr[2][0] == 1){
+            //                 $gebjahr[2] = '20' . $gebjahr[2];
+                                                
+            //                 $kunde['Geburtsdatum'] = $gebjahr[1] . '-'. $gebjahr[0] .'-'. $gebjahr[2];
+            //             } else {
+            //                 $gebjahr[2] = '19' . $gebjahr[2];
+                        
+            //                 $kunde['Geburtsdatum'] = $gebjahr[1] . '-'. $gebjahr[0] .'-'. $gebjahr[2];
+                        
+                         
+            //             }
+
+            //         }
+             
+           
+            //   if(strlen($kunde['Geburtsdatum']) != 10){
+             
+            //     $kunde['Geburtsdatum'] = '01-01-1990';
+
+            //   }
+
+          
+            //     // $client = Kunde::Create([
+            //     //     'fn' => ucfirst($kunde['Vorname']),
+            //     //     'ln' => ucfirst($kunde['Nachname']),
+            //     //     'addresse' => ucfirst($kunde['Straße'] . ' ' . $kunde['Hausnummer'] . ' ' . $kunde['PLZ']. ' ' .$kunde['Stadt']),
+            //     //     'dob' => date('Y-m-d H:i:s', strtotime($kunde['Geburtsdatum'])),
+            //     //     'email' => $kunde['Email'],
+            //     //     'phone' => '',
+            //     //     'idnumber' => $kunde['Personalnr'],
+            //     //     'notice' => '',
+            //     // ]);
+            // }
+
+            var_dump(count($Essen_Alle_Daten)); 
+     
+    }
+
     /**
      * Display the specified resource.
      *

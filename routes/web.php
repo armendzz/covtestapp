@@ -46,7 +46,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/allerechnungen', [App\Htt
 Route::get('/armendtest', [App\Http\Controllers\KundeController::class, 'armend']);
 // Show all test without ergebnis
 Route::middleware(['auth:sanctum', 'verified'])->get('/inwartezeit', [App\Http\Controllers\TestController::class, 'inWarteZeit'])->name('inwartezeit');
-
+//Route::middleware(['auth:sanctum', 'verified'])->get('/import', [App\Http\Controllers\KundeController::class, 'import'])->name('import');
 // Route for Setting result and Print or send in email result
 Route::middleware(['auth:sanctum', 'verified'])->put('/test-ergebnis/{id}', [App\Http\Controllers\TestController::class, 'testErgebnis'])->name('testergebnis');
 

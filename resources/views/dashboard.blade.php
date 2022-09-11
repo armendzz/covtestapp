@@ -24,7 +24,9 @@
                         <a href="/inwartezeit">
                             <div class="card-body dashboard-cards">
                                 <h1 class="text-center">
+                                 
                                     {{count($inwartezeit)}}
+                                
                                 </h1>
                                 <h5 class="text-center">Test(s) in Wartezeit...</h5>
                             </div>

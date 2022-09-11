@@ -490,11 +490,11 @@ class TestController extends Controller
         $pdf->SetFontSize(10);
         $pdf->SetXY(10, 30);
 
-        $pdf->SetFontSize(13);
-        $pdf->setY(7);
-        $pdf->cell(0.7);
-        $pdf->Cell(174, 6, 'Test-Nr: '. $testnr, 0, 0, 'R');
-        $pdf->Ln();
+        // $pdf->SetFontSize(13);
+        // $pdf->setY(7);
+        // $pdf->cell(0.7);
+        // $pdf->Cell(174, 6, 'Test-Nr: '. $testnr, 0, 0, 'R');
+        // $pdf->Ln();
 
         $pdf->SetFontSize(10);
         $pdf->setY(56);
