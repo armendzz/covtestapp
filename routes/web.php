@@ -43,6 +43,10 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/allesrechnungen', [App\H
 Route::middleware(['auth:sanctum', 'verified'])->post('/rechnungdownload', [App\Http\Controllers\RechnungController::class, 'rechnungdownload'])->name('rechnungdownload');
 Route::middleware(['auth:sanctum', 'verified'])->get('/allerechnungen', [App\Http\Controllers\RechnungController::class, 'alles'])->name('allerechnungens');
 //
+Route::middleware(['auth:sanctum', 'verified'])->get('/sign', function(){
+
+    return view('kunde/signature');
+} );
 Route::get('/armendtest', [App\Http\Controllers\KundeController::class, 'armend']);
 // Show all test without ergebnis
 Route::middleware(['auth:sanctum', 'verified'])->get('/inwartezeit', [App\Http\Controllers\TestController::class, 'inWarteZeit'])->name('inwartezeit');
