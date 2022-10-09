@@ -167,7 +167,7 @@
 
            
                 </div>
-                <div class="card col-md-5 m-3 stats-card">
+                <!-- <div class="card col-md-5 m-3 stats-card">
                        
                     <div class="card-body dashboard-cards">
                         <table class="mb-4">
@@ -200,8 +200,9 @@
                        
                           Tests diesen Monat
                     </div>
+                    </div> -->
                 @endif
-            </div>
+            
             </div>
 
 

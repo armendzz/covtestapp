@@ -22,18 +22,44 @@ const io = require("socket.io")(server, {
   }
 });
 
+var appServerId = '';
+let warteForSign = false;
+let sign = '';
+let allData = {};
 
 io.on('connection', (socket) => {
-  console.log(`⚡: ${socket.id} user just connected`);
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
+
+  socket.on('storeClientInfo', function (data) {
+    appServerId = data.customId;
+
+    if (appServerId == "111111") {
+      if (allData.sign == undefined || allData.sign == '') {
+        socket.emit('checkLoading', warteForSign);
+      } else {
+        socket.emit('signature', allData);
+      }
+    }
   });
 
-  socket.on('message', (data) => {
-        //sends the data to everyone except you.
-    socket.broadcast.emit('response', data); 
 
-    //sends the data to everyone connected to the server
-    // socket.emit("response", data)
+  // get data from admin and send to client
+  socket.on('data', (data) => {
+    allData = {};
+    if (appServerId == "111111") {
+      warteForSign = data.loading;
+    
+      allData = data;
+      socket.broadcast.emit('response', data);
+    }
   });
+
+  //get data from clent and send to admin
+  socket.on('sign', (data) => {
+    warteForSign = false;
+    allData['sign'] = data;
+   
+    socket.broadcast.emit('signature', allData);
+
+  });
+
 });

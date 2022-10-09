@@ -1088,16 +1088,20 @@ select {
   z-index: 50;
 }
 
+.order-2 {
+  order: 2;
+}
+
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
 
-.m-3 {
-  margin: 0.75rem;
-}
-
 .m-2 {
   margin: 0.5rem;
+}
+
+.m-3 {
+  margin: 0.75rem;
 }
 
 .mx-auto {
@@ -1105,24 +1109,24 @@ select {
   margin-right: auto;
 }
 
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-}
-
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
 }
 
-.mx-6 {
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-}
-
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.mx-6 {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .my-4 {
@@ -1298,12 +1302,8 @@ select {
   height: 5rem;
 }
 
-.h-64 {
-  height: 16rem;
-}
-
-.h-24 {
-  height: 6rem;
+.h-full {
+  height: 100%;
 }
 
 .min-h-screen {
@@ -1366,24 +1366,12 @@ select {
   width: 5rem;
 }
 
-.w-3\/5 {
-  width: 60%;
-}
-
-.w-1\/5 {
-  width: 20%;
-}
-
-.w-64 {
-  width: 16rem;
-}
-
-.w-24 {
-  width: 6rem;
-}
-
 .min-w-0 {
   min-width: 0px;
+}
+
+.min-w-\[150px\] {
+  min-width: 150px;
 }
 
 .max-w-screen-xl {
@@ -1458,6 +1446,10 @@ select {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.resize {
+  resize: both;
 }
 
 .list-inside {
@@ -1751,14 +1743,19 @@ select {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
-.bg-blue-600 {
+.bg-orange-400 {
   --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+  background-color: rgb(251 146 60 / var(--tw-bg-opacity));
 }
 
 .bg-green-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+}
+
+.bg-blue-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-25 {
@@ -1909,24 +1906,24 @@ select {
   padding-bottom: 0.25rem;
 }
 
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+
 .pl-4 {
   padding-left: 1rem;
 }
 
-.pt-8 {
-  padding-top: 2rem;
-}
-
-.pb-5 {
-  padding-bottom: 1.25rem;
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
 .pb-2 {
   padding-bottom: 0.5rem;
 }
 
-.pt-3 {
-  padding-top: 0.75rem;
+.pt-8 {
+  padding-top: 2rem;
 }
 
 .text-left {
@@ -2148,6 +2145,10 @@ select {
 
 .opacity-50 {
   opacity: 0.5;
+}
+
+.opacity-80 {
+  opacity: 0.8;
 }
 
 .shadow-sm {
@@ -2444,6 +2445,16 @@ a {
   background-color: rgb(248 113 113 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-orange-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 88 12 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-green-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 101 52 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-blue-500:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
@@ -2638,11 +2649,6 @@ a {
 
 @media (prefers-color-scheme: dark) {
 
-  .dark\:border-gray-700 {
-    --tw-border-opacity: 1;
-    border-color: rgb(55 65 81 / var(--tw-border-opacity));
-  }
-
   .dark\:bg-gray-900 {
     --tw-bg-opacity: 1;
     background-color: rgb(17 24 39 / var(--tw-bg-opacity));
@@ -2653,29 +2659,9 @@ a {
     background-color: rgb(254 202 202 / var(--tw-bg-opacity));
   }
 
-  .dark\:bg-gray-800 {
-    --tw-bg-opacity: 1;
-    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-  }
-
   .dark\:text-red-800 {
     --tw-text-opacity: 1;
     color: rgb(153 27 27 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-gray-500 {
-    --tw-text-opacity: 1;
-    color: rgb(107 114 128 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
-  }
-
-  .dark\:text-gray-400 {
-    --tw-text-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-text-opacity));
   }
 }
 
@@ -2724,10 +2710,6 @@ a {
     margin-left: 1.5rem;
   }
 
-  .sm\:ml-0 {
-    margin-left: 0px;
-  }
-
   .sm\:block {
     display: block;
   }
@@ -2742,10 +2724,6 @@ a {
 
   .sm\:h-10 {
     height: 2.5rem;
-  }
-
-  .sm\:h-20 {
-    height: 5rem;
   }
 
   .sm\:w-10 {
@@ -2871,10 +2849,6 @@ a {
   .sm\:text-left {
     text-align: left;
   }
-
-  .sm\:text-right {
-    text-align: right;
-  }
 }
 
 @media (min-width: 768px) {
@@ -2920,6 +2894,10 @@ a {
 
   .lg\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .lg\:w-3\/5 {
+    width: 60%;
   }
 
   .lg\:px-8 {

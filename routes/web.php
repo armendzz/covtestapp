@@ -36,6 +36,11 @@ Route::resource('tests', TestController::class, [
 // Stats Routes - only for loggedin user 
 Route::middleware(['auth:sanctum', 'verified'])->get('/stats', [StatsController::class, 'index'])->name('allstats');
 
+// selbstauskunft
+Route::middleware(['auth:sanctum', 'verified'])->get('/selbstauskunfte', [App\Http\Controllers\SelbstauskunftController::class, 'index'])->name('selbstauskunftindex');
+Route::middleware(['auth:sanctum', 'verified'])->get('/selbstauskunfte/{id}', [App\Http\Controllers\SelbstauskunftController::class, 'show'])->name('selbstauskunftshow');
+
+
 // Rechnung Routes - only for loggedin user 
 Route::middleware(['auth:sanctum', 'verified'])->get('/rechnung', [App\Http\Controllers\RechnungController::class, 'index'])->name('rechnungenindex');
 Route::middleware(['auth:sanctum', 'verified'])->get('/rechnung/{id}', [App\Http\Controllers\RechnungController::class, 'show'])->name('rechnungenshow');
