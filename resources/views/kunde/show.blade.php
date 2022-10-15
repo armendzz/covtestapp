@@ -1,9 +1,42 @@
+<div class="absolute h-full w-full bg-gray-200 z-50 opacity-80 hidden" id="backgoundgray1">
+
+</div>
 <x-app-layout>
+<div class="absolute h-full w-full bg-gray-200 z-50 opacity-80 hidden" id="backgoundgray2">
+        asd
+</div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Aktueller Test') }}
         </h2>
     </x-slot>
+   
+    <div class="absolute w-full z-50 loading  hidden" style="top: 300px;" id="loading">
+        <div class="bg-white order-2 border-black max-w-[1000px] mx-auto">
+            <div class="font-bold border-b text-xl text-center border-t border-r border-l rounded flex justify-between ">
+                <div class="px-4 py-2">unterschrift übernehmen</div>
+                <div class="hover:tx-xl hover:cursor-pointer bg-red-600 hover:bg-red-400 px-3 py-2 text-white"
+                onclick="cancelsignature()">Xasd</div>
+            </div>
+         
+            <div class="flex justify-center mt-2">
+                <h1>Bitte warten</h1>
+            </div>
+            <div class="flex justify-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="">
+            </div>
+
+            <div class="pb-4 flex justify-center">
+            <button class="btn-danger btn" id="cancelsignature" onclick="cancelsignature()">Abrechen</button>
+            </div>
+          
+            
+        </div>
+
+
+    </div>
+
+
     <div class="absolute w-full z-50 grund hidden" style="top: 300px;" id="grund3">
         <div class="bg-gray-100 border-2 border-black max-w-[1000px] mx-auto">
             <div class="font-bold bg-white text-xl text-center border-t border-r border-l rounded flex justify-between ">
@@ -207,7 +240,7 @@
                         <input type="hidden" name="price" id="pricedrucken" value="">
                         <button class="btn-primary btn" id="btndrucken" disabled>Testen & Drucken</button>
                     </form>
-                  
+                    <button class="btn-secondary btn" id="senddata" onclick="sendData()" disabled>Daten Senden</button>
                     {{-- Show "Testen & Email" button only if kunde has e-mail --}}
                     @if (isset($kunde->email))
                         <form action="/tests" method="post" enctype="multipart/form">
@@ -246,7 +279,7 @@ document.getElementById('priceemail').value = '13';
 
                         function kosten() {
                             let price = document.querySelector('input[name="kosten"]:checked').value;
-                            document.getElementById('btndrucken').disabled = false;
+                           
 
                             document.getElementById('pricedrucken').value = price;
 
@@ -317,8 +350,8 @@ document.getElementById('priceemail').value = '13';
                             }
    
                                 document.getElementById('ausgewahlteGrund').innerHTML = grundText;
-
-                                document.getElementById('btnemail').disabled = false;
+                              
+                                document.getElementById('senddata').disabled = false;
                             document.getElementById('priceemail').value = price;
                         }
 
@@ -360,7 +393,62 @@ document.getElementById('priceemail').value = '13';
                             }
                         };
                     </script>
-                
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
+
+        <span style="display: none;" id="fn">{{ $kunde->fn }}</span>
+        <span style="display: none;" id="ln">{{ $kunde->ln }}</span>
+        <span style="display: none;" id="dob">{{ $kunde->dob }}</span>
+      
+    <script>
+        const socket = io.connect('http://localhost:5000');
+
+        socket.on('connect', function (data) {
+        socket.emit('storeClientInfo', { customId:"111111" });
+    });
+      
+        socket.on('checkLoading', (loading) => {
+
+            if(loading){
+                document.getElementById('backgoundgray1').classList.remove('hidden');
+            document.getElementById('backgoundgray2').classList.remove('hidden');
+            document.getElementById('loading').classList.remove('hidden');
+            }
+        });
+
+        function sendData(){
+            // document.getElementById('btndrucken').disabled = false;
+            //                     document.getElementById('btnemail').disabled = false;
+
+            
+            document.getElementById('backgoundgray1').classList.remove('hidden');
+            document.getElementById('backgoundgray2').classList.remove('hidden');
+            document.getElementById('loading').classList.remove('hidden');
+
+            let obj = {
+            client: 'appServer',
+            loading: true,
+            fn:  document.getElementById('fn').innerHTML,
+            ln: document.getElementById('ln').innerHTML,
+            dob: document.getElementById('dob').innerHTML,
+            grund: document.getElementById('ausgewahlteGrund').innerHTML
+            }
+            console.log(obj)
+            socket.emit('data', obj);
+        }
+
+        function cancelsignature(){
+            document.getElementById('backgoundgray1').classList.add('hidden');
+            document.getElementById('backgoundgray2').classList.add('hidden');
+            document.getElementById('loading').classList.add('hidden');
+            let obj = {
+            client: 'appServer',
+            loading: false,
+            }
+            socket.emit('data', obj);
+        }
+    </script>
             </div>
         </div>
     </div>

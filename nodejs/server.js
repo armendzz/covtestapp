@@ -22,17 +22,32 @@ const io = require("socket.io")(server, {
   }
 });
 
+var appServerId = '';
+let warteForSign = false;
+
 
 io.on('connection', (socket) => {
-  console.log(`⚡: ${socket.id} user just connected`);
-  socket.on('disconnect', () => {
-    console.log('A user disconnected');
-  });
 
-  socket.on('message', (data) => {
+  socket.on('storeClientInfo', function (data) {
+  appServerId = data.customId;
+
+  if(appServerId == "111111"){
+    socket.emit('checkLoading', warteForSign); 
+  }
+
+});
+
+
+  socket.on('data', (data) => {
+
+    if(appServerId == "111111"){
+      warteForSign = data.loading;
+      socket.broadcast.emit('response', data); 
+    }
+    
         //sends the data to everyone except you.
-    socket.broadcast.emit('response', data); 
-
+   // socket.broadcast.emit('response', data); 
+  //  console.log(data);
     //sends the data to everyone connected to the server
     // socket.emit("response", data)
   });

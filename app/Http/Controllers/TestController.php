@@ -164,6 +164,7 @@ class TestController extends Controller
         $pdf->Cell(99.8, 6, date("d.m.Y"), 0, 0, 'L');
         $pdf->Ln();
         $pdf->Image('signature/'.Auth::user()->id.'.png',160,195,-300);
+       
         $pdf->Output('F', $filename);
 
            
@@ -457,9 +458,10 @@ class TestController extends Controller
         $month = 'testen/' . date("m-Y");
         $name = $test->ln . ', ' . $test->fn;
         $emailnamekunde = $test->ln . ', ' . $test->fn;
-        $filename = $month . '/' . date("d.m.Y  -  H:i:s ") . $name . '.pdf';
 
-        // Set result and filename to update data in database
+        
+        $filename = $month . '/' . date("d.m.Y  -  H-i-s ") . $name . '.pdf';
+   
         $data = [
             'ergebnis' => $request->ergebnis,
             'filename' => $filename,
@@ -654,8 +656,8 @@ class TestController extends Controller
 
         $pdf->useTemplate($pageId, 0, 0, 210, 297);
        }
-
-        $pdf->Output('F', $filename);
+       
+        $pdf->Output('F',  $filename);
         // PDF Filling END 
 
       
@@ -725,7 +727,7 @@ class TestController extends Controller
         $month = 'positivetesten/' . date("m-Y");
         $name = $test[0]->ln . ', ' . $test[0]->fn;
 
-        $filename = $month . '/' . date("d.m.Y  -  H:i:s ") . $name . '.pdf';
+        $filename = $month . '/' . date("d.m.Y  -  H-i-s ") . $name . '.pdf';
 
         if (!file_exists($month)) {
             mkdir($month, 0777, true);

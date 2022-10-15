@@ -9,59 +9,59 @@
 </head>
 <style>
     .wrapper {
-  position: relative;
-  width: 400px;
-  height: 200px;
+
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-img {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
 
 .signature-pad {
-  position: absolute;
-  left: 0;
-  top: 0;
   width:400px;
   height:200px;
+  border: 1px solid black;
 }
 </style>
 <body>
-    <div class="w-full text-xl">
+    <div id="datainfo" class="w-full text-xl hidden">
         <h1 class="text-2xl text-center mt-5">DatenInfo</h1>
-        <div id="dateninfo" class="w-3/5 mx-auto border shadow rouded mt-4">
+        <div id="dateninfo" class="w-full lg:w-3/5 mx-auto border shadow rouded mt-4">
             <div class="flex w-full p-2 border-b">
-                <div class="w-1/5">Nachname:</div>
-                <div>Armend</div>
+                <div class="min-w-[150px]">Nachname:</div>
+                <div id="ln"></div>
             </div>
             <div class="flex w-full p-2 border-b">
-                <div class="w-1/5">Vorname:</div>
-                <div>Armend</div>
+                <div class="min-w-[150px]">Vorname:</div>
+                <div id="fn"></div>
             </div>
             <div class="flex w-full p-2 border-b">
-                <div class="w-1/5">Geb:</div>
-                <div>12.09.1992</div>
+                <div class="min-w-[150px]">Geb:</div>
+                <div id="dob"></div>
             </div>
             <div class="flex w-full p-2 border-b">
-                <div class="w-1/5">Grund:</div>
-                <div>freitesten</div>
+                <div class="min-w-[150px]">Grund:</div>
+                <div id="grund"></div>
             </div>
             <div class="flex w-full p-2 border-b">
-                <div class="wrapper">
+                <div class="wrapper w-full">
                     
-                    <canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+                    <canvas id="signature-pad" class="signature-pad mx-auto" width=400 height=200></canvas>
                   </div>
                
             </div>
-            <div>
-                <button id="save">Save</button>
-                <button id="clear">Clear</button>
+            <div class="flex justify-between">
+               
+                <button id="clear" class="text-2xl bg-orange-400 text-white m-2 p-2 rounded hover:bg-orange-600">Korektur</button>
+                <button id="save" class="text-2xl bg-green-600 text-white m-2 p-2 rounded hover:bg-green-800">Bestätigen</button>
               </div>
+        </div>
+    </div>
+
+    <div id="ads" class="">
+    <h1 class="text-2xl text-center mt-5">TestZentrum TZT Essen</h1>
+        <div class="w-full lg:w-3/5 mx-auto border shadow rouded mt-4">
+        asd
+       
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
@@ -93,7 +93,22 @@ cancelButton.addEventListener('click', function (event) {
     <script>
         const socket = io.connect('http://localhost:5000');
         socket.on('response', (data) => {
-            notify.textContent = data;
+   
+            if(data.loading){
+                document.getElementById('datainfo').classList.remove("hidden");
+            document.getElementById('ads').classList.add("hidden");
+            document.getElementById('fn').innerHTML = data.fn;
+            document.getElementById('ln').innerHTML = data.ln;
+            document.getElementById('dob').innerHTML = data.dob;
+            document.getElementById('grund').innerHTML = data.grund;
+            } else {
+                document.getElementById('datainfo').classList.add("hidden");
+            document.getElementById('ads').classList.remove("hidden");
+            document.getElementById('fn').innerHTML = '';
+            document.getElementById('ln').innerHTML = '';
+            document.getElementById('dob').innerHTML = '';
+            document.getElementById('grund').innerHTML = '';
+            }
         });
     </script>
 </body>
