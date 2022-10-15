@@ -24,6 +24,7 @@ const io = require("socket.io")(server, {
 
 var appServerId = '';
 let warteForSign = false;
+<<<<<<< HEAD
 
 
 io.on('connection', (socket) => {
@@ -50,5 +51,44 @@ io.on('connection', (socket) => {
   //  console.log(data);
     //sends the data to everyone connected to the server
     // socket.emit("response", data)
+=======
+let sign = '';
+let allData = {};
+
+io.on('connection', (socket) => {
+
+  socket.on('storeClientInfo', function (data) {
+    appServerId = data.customId;
+
+    if (appServerId == "111111") {
+      if (allData.sign == undefined || allData.sign == '') {
+        socket.emit('checkLoading', warteForSign);
+      } else {
+        socket.emit('signature', allData);
+      }
+    }
   });
+
+
+  // get data from admin and send to client
+  socket.on('data', (data) => {
+    allData = {};
+    if (appServerId == "111111") {
+      warteForSign = data.loading;
+    
+      allData = data;
+      socket.broadcast.emit('response', data);
+    }
+>>>>>>> 4f2674d349c7e6fc27b7c498ec63826106b47c2d
+  });
+
+  //get data from clent and send to admin
+  socket.on('sign', (data) => {
+    warteForSign = false;
+    allData['sign'] = data;
+   
+    socket.broadcast.emit('signature', allData);
+
+  });
+
 });

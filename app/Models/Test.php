@@ -46,4 +46,8 @@ class Test extends Model
         return $this->hasOne(Rechnung::class);
     }
 
+    public function selbstauskunft(){
+        return $this->hasOne(Selbstauskunft::class);
+    }
+
 }

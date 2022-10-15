@@ -74,14 +74,6 @@
 var saveButton = document.getElementById('save');
 var cancelButton = document.getElementById('clear');
 
-saveButton.addEventListener('click', function (event) {
-    console.log(canvas.toDataURL());
-  const link = document.createElement('a');
-  link.download = 'download.png';
-  link.href = canvas.toDataURL();
-  link.click();
- 
-});
 
 cancelButton.addEventListener('click', function (event) {
     canvas.clear();
@@ -92,8 +84,14 @@ cancelButton.addEventListener('click', function (event) {
         crossorigin="anonymous"></script>
     <script>
         const socket = io.connect('http://localhost:5000');
-        socket.on('response', (data) => {
+
    
+        socket.on('response', (data) => {
+<<<<<<< HEAD
+   
+=======
+            
+>>>>>>> 4f2674d349c7e6fc27b7c498ec63826106b47c2d
             if(data.loading){
                 document.getElementById('datainfo').classList.remove("hidden");
             document.getElementById('ads').classList.add("hidden");
@@ -108,8 +106,35 @@ cancelButton.addEventListener('click', function (event) {
             document.getElementById('ln').innerHTML = '';
             document.getElementById('dob').innerHTML = '';
             document.getElementById('grund').innerHTML = '';
+<<<<<<< HEAD
+=======
+            canvas.clear();
+>>>>>>> 4f2674d349c7e6fc27b7c498ec63826106b47c2d
             }
         });
+
+
+        saveButton.addEventListener('click', function (event) {
+
+           // const link = document.createElement('a');
+            //   link.download = 'download.png';
+            //   link.href = canvas.toDataURL();
+            //   link.click();
+            const img = canvas.toDataURL();
+          
+            socket.emit('sign', img);
+            canvas.clear();
+            document.getElementById('datainfo').classList.add("hidden");
+            document.getElementById('ads').classList.remove("hidden");
+            document.getElementById('fn').innerHTML = '';
+            document.getElementById('ln').innerHTML = '';
+            document.getElementById('dob').innerHTML = '';
+            document.getElementById('grund').innerHTML = '';
+            });
+
+
+
+
     </script>
 </body>
 

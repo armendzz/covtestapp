@@ -1,54 +1,48 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Rechnung') }}
+            {{ __('Rechnung suchen') }}
         </h2>
     </x-slot>
 
     <div class="container pb-5">
         <div class="card">
             {{-- <livewire:testen /> --}}
-            <h3 class="text pl-3 mt-2">Rechnungen vom: {{ $date }}</h3>
-            <h3 class="text pl-3 mt-2">
-              
-            </h3>
+            <h3 class="text pl-3">Letzte Rechnungen</h3>
             <div class="card-body">
-                @if ($rechnungen->isEmpty())
+                @if ($selbstauskunft->isEmpty())
                     <div class="text-gray-500 text-sm">
                         Kein Test mit den eingegebenen Daten gefunden.
                     </div>
                 @else
-                <form action="/rechnungdownload" method="POST">
-                    @csrf
-                    <input type="hidden" name="date" value="{{ $date }}">
-                    <button class="btn btn-success mb-2">Heruterladen Alles Rechnungen Vom {{ $date }}</button>
-                </form>
+
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th scope="col">TestNr</th>
                                 <th scope="col">Kunde/Kundin</th>
-                                <th scope="col">Rechnung NR</th>
+            
                                 <th scope="col">Datum & Uhrzeit</th>
                               
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($rechnungen as $rechnung)
-                            @if($rechnung->test)
+                            @foreach ($selbstauskunft as $sa)
                                 <tr>
-                                    <th scope="row">{{ $rechnung->test->fn }} {{ $rechnung->test->ln }} 
+                                    <td>{{ $sa->test->test_nr }}</td>
+                                    <th scope="row">{{ $sa->test->fn }} {{ $sa->test->ln }} 
                                        
                                       
                                     </th>
-                                    <td>{{ $rechnung->rechung_nr }}</td>
-                                    <td>{{ $rechnung->created_at }}</td>
+                              
+                                    <td>{{ $sa->created_at }}</td>
                                     
                                     <td style="text-align:right;">
                                         <div style="display: flex; float: right;">
                                      
                                             <a class="btn btn-primary mx-2 btn-md"
-                                                href="/rechnung/{{ $rechnung->id }}">Rechnung
+                                                href="/selbstauskunfte/{{ $sa->id }}">Selbstauskunft
                                                 ansehen</a>
                                         </div>
                                         <!-- Modal -->
@@ -56,11 +50,12 @@
             </div>
             </td>
             </tr>
-            @endif
             @endforeach
             </tbody>
             </table>
-          
+            <div class="paginate">
+                {{ $selbstauskunft->links() }}
+            </div>
             @endif
         </div>
     </div>
