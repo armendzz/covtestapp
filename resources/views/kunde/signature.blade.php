@@ -87,11 +87,7 @@ cancelButton.addEventListener('click', function (event) {
 
    
         socket.on('response', (data) => {
-<<<<<<< HEAD
-   
-=======
             
->>>>>>> 4f2674d349c7e6fc27b7c498ec63826106b47c2d
             if(data.loading){
                 document.getElementById('datainfo').classList.remove("hidden");
             document.getElementById('ads').classList.add("hidden");
@@ -106,10 +102,7 @@ cancelButton.addEventListener('click', function (event) {
             document.getElementById('ln').innerHTML = '';
             document.getElementById('dob').innerHTML = '';
             document.getElementById('grund').innerHTML = '';
-<<<<<<< HEAD
-=======
             canvas.clear();
->>>>>>> 4f2674d349c7e6fc27b7c498ec63826106b47c2d
             }
         });
 

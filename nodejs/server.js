@@ -24,34 +24,6 @@ const io = require("socket.io")(server, {
 
 var appServerId = '';
 let warteForSign = false;
-<<<<<<< HEAD
-
-
-io.on('connection', (socket) => {
-
-  socket.on('storeClientInfo', function (data) {
-  appServerId = data.customId;
-
-  if(appServerId == "111111"){
-    socket.emit('checkLoading', warteForSign); 
-  }
-
-});
-
-
-  socket.on('data', (data) => {
-
-    if(appServerId == "111111"){
-      warteForSign = data.loading;
-      socket.broadcast.emit('response', data); 
-    }
-    
-        //sends the data to everyone except you.
-   // socket.broadcast.emit('response', data); 
-  //  console.log(data);
-    //sends the data to everyone connected to the server
-    // socket.emit("response", data)
-=======
 let sign = '';
 let allData = {};
 
@@ -79,7 +51,6 @@ io.on('connection', (socket) => {
       allData = data;
       socket.broadcast.emit('response', data);
     }
->>>>>>> 4f2674d349c7e6fc27b7c498ec63826106b47c2d
   });
 
   //get data from clent and send to admin
