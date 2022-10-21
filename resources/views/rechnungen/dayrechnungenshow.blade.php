@@ -35,6 +35,7 @@
                         </thead>
                         <tbody>
                             @foreach ($rechnungen as $rechnung)
+                            @if($rechnung->test)
                                 <tr>
                                     <th scope="row">{{ $rechnung->test->fn }} {{ $rechnung->test->ln }} 
                                        
@@ -55,6 +56,7 @@
             </div>
             </td>
             </tr>
+            @endif
             @endforeach
             </tbody>
             </table>

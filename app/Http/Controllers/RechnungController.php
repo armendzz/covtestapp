@@ -45,7 +45,9 @@ class RechnungController extends Controller
                 // extracting filename with substr/strlen
                 
 
-                $zip->addFile($file->filename);
+                if($file->test){
+                    $zip->addFile($file->filename);
+                }
          
         }
         $zip->close();
