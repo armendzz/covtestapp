@@ -44,13 +44,13 @@
             </div>
             <div class="flex w-full p-2 border-b">
                 <div class="wrapper w-full">
-
+                    
                     <canvas id="signature-pad" class="signature-pad mx-auto" width=400 height=200></canvas>
                   </div>
-
+               
             </div>
             <div class="flex justify-between">
-
+               
                 <button id="clear" class="text-2xl bg-orange-400 text-white m-2 p-2 rounded hover:bg-orange-600">Korektur</button>
                 <button id="save" class="text-2xl bg-green-600 text-white m-2 p-2 rounded hover:bg-green-800">Bestätigen</button>
               </div>
@@ -60,7 +60,7 @@
     <div id="ads" class="">
     <h1 class="text-2xl text-center mt-5">TestZentrum TZT Essen</h1>
         <div class="w-full lg:w-3/5 mx-auto border shadow rouded mt-4">
-
+       
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
@@ -82,11 +82,11 @@ cancelButton.addEventListener('click', function (event) {
         integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
         crossorigin="anonymous"></script>
     <script>
-        const socket = io.connect('http://127.0.0.1:5522');
+        const socket = io.connect('https://nodeservertzt.iarmend.de');
 
-
+   
         socket.on('response', (data) => {
-
+            
             if(data.loading){
                 document.getElementById('datainfo').classList.remove("hidden");
             document.getElementById('ads').classList.add("hidden");
@@ -113,7 +113,7 @@ cancelButton.addEventListener('click', function (event) {
             //   link.href = canvas.toDataURL();
             //   link.click();
             const img = canvas.toDataURL();
-
+          
             socket.emit('sign', img);
             canvas.clear();
             document.getElementById('datainfo').classList.add("hidden");

@@ -1,12 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KundeController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\RechnungController;
 use App\Http\Controllers\StatsController;
-use App\Http\Controllers\TestController;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -18,30 +16,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/troni', function(){
-   dd(Hash::make('asdasdasd'));
-});
-
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/import', [App\Http\Controllers\HomeController::class, 'import']);
 
 // Dashboard route - only for loggedin user !!
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
-// Kunde routes - only for loggedin user
+// Kunde routes - only for loggedin user 
 Route::resource('kunde', KundeController::class, [
     'names' => [
         'index' => 'kunde-suchen',
         'create' => 'kunde-create',
         ]])->middleware('auth');
 
-// Test Routes - only for loggedin user
+// Test Routes - only for loggedin user 
 Route::resource('tests', TestController::class, [
     'names' => [
         'index' => 'test-suchen',
         ]])->middleware('auth');
 
-// Stats Routes - only for loggedin user
+// Stats Routes - only for loggedin user 
 Route::middleware(['auth:sanctum', 'verified'])->get('/stats', [StatsController::class, 'index'])->name('allstats');
 
 // selbstauskunft
@@ -49,7 +41,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/selbstauskunfte', [App\Ht
 Route::middleware(['auth:sanctum', 'verified'])->get('/selbstauskunfte/{id}', [App\Http\Controllers\SelbstauskunftController::class, 'show'])->name('selbstauskunftshow');
 
 
-// Rechnung Routes - only for loggedin user
+// Rechnung Routes - only for loggedin user 
 Route::middleware(['auth:sanctum', 'verified'])->get('/rechnung', [App\Http\Controllers\RechnungController::class, 'index'])->name('rechnungenindex');
 Route::middleware(['auth:sanctum', 'verified'])->get('/rechnung/{id}', [App\Http\Controllers\RechnungController::class, 'show'])->name('rechnungenshow');
 Route::middleware(['auth:sanctum', 'verified'])->post('/allesrechnungen', [App\Http\Controllers\RechnungController::class, 'dayrechnungen'])->name('allesrechnungens');
@@ -79,19 +71,18 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/positive', [App\Http\Cont
 // Positive tests fill form to send to gesundheitsamt
 Route::middleware(['auth:sanctum', 'verified'])->get('/positiveform/{id}', [App\Http\Controllers\TestController::class, 'positiveForm']);
 
-// Prepare Positive tests for sending to geseundheitsamt
+// Prepare Positive tests for sending to geseundheitsamt 
 Route::middleware(['auth:sanctum', 'verified'])->post('/positiveformprepare/{id}', [App\Http\Controllers\TestController::class, 'positiveFormPrepare']);
 
 // Send fullyfilled pdf to gesundheitsamt
 Route::middleware(['auth:sanctum', 'verified'])->put('/positiveformsend/{id}', [App\Http\Controllers\TestController::class, 'positiveFormSend']);
 
-// send all inexistent routes to dashboard or in login page if user is not logged in
+// send all inexistent routes to dashboard or in login page if user is not logged in 
 Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return redirect('dashboard');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/{any}', function () {
-
     return redirect('dashboard');
 });
 

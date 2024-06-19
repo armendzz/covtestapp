@@ -1,14 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Imports\TestsImport;
 use App\Models\Test;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
-
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -41,8 +37,6 @@ class HomeController extends Controller
     }
 
     public function import(){
-        Excel::import(new TestsImport, 'all_bookings_818878.csv');
-
-        return redirect('/')->with('success', 'All good!');
+        dd('asd');
     }
 }

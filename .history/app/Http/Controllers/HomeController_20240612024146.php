@@ -7,7 +7,6 @@ use App\Models\Test;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
 
 
 class HomeController extends Controller
@@ -41,7 +40,7 @@ class HomeController extends Controller
     }
 
     public function import(){
-        Excel::import(new TestsImport, 'all_bookings_818878.csv');
+        Excel::import(new TestsImport, 'users.xlsx');
 
         return redirect('/')->with('success', 'All good!');
     }

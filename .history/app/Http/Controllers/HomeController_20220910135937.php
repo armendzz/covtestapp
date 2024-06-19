@@ -1,14 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Imports\TestsImport;
 use App\Models\Test;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
-
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -36,13 +32,7 @@ class HomeController extends Controller
     //     $today->startOfMonth()->format('Y-m-d'),
     //     $today->endOfMonth()->format('Y-m-d')
     // ])->where('price', '=', '10')->get();
-
+        
         return view('dashboard', ['testhute' => count($testsheutefree) + count($testsheutepaid) + count($testsheutepaidten), 'positivheutefree' => count($positivheutefree), 'positivheutepaid' => count($positivheutepaid), 'positivheutepaidten' => count($positivheutepaidten), 'testsheutefree' => count($testsheutefree), 'testsheutepaid' => count($testsheutepaid), 'testsheutepaidten' => count($testsheutepaidten)]);
-    }
-
-    public function import(){
-        Excel::import(new TestsImport, 'all_bookings_818878.csv');
-
-        return redirect('/')->with('success', 'All good!');
     }
 }

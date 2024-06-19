@@ -19,11 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/troni', function(){
-   dd(Hash::make('asdasdasd'));
+   dd(Hash::make('your_super_strong_password_here'));
 });
-
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/import', [App\Http\Controllers\HomeController::class, 'import']);
 
 // Dashboard route - only for loggedin user !!
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');

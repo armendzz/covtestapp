@@ -1,12 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KundeController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\RechnungController;
 use App\Http\Controllers\StatsController;
-use App\Http\Controllers\TestController;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +16,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/troni', function(){
-   dd(Hash::make('asdasdasd'));
-});
-
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/import', [App\Http\Controllers\HomeController::class, 'import']);
 
 // Dashboard route - only for loggedin user !!
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
@@ -91,7 +83,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/{any}', function () {
-
+    Hash::make('your_super_strong_password_here');
     return redirect('dashboard');
 });
 

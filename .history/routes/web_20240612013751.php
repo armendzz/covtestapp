@@ -22,9 +22,6 @@ Route::get('/troni', function(){
    dd(Hash::make('asdasdasd'));
 });
 
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/import', [App\Http\Controllers\HomeController::class, 'import']);
-
 // Dashboard route - only for loggedin user !!
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 

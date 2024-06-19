@@ -115,7 +115,7 @@
                     Persönlichen Budgets beschäftigt sind </label>
             </div>
 
-
+             
             <div class="form-check py-1 px-4 border border-gray-900">
                 <input class="form-check-input" type="radio" onclick="kosten()" name="kosten" value="11" id="11">
                 <label class="form-check-label hover:cursor-pointer hover:font-bold ml-3 text-lg w-full text-black" for="11">Pflegende Angehörige </label>
@@ -125,10 +125,10 @@
                 <input class="form-check-input" type="radio" onclick="kosten()" name="kosten" value="4" id="4">
                 <label class="form-check-label hover:cursor-pointer hover:font-bold ml-3 text-lg w-full text-black" for="4">Freitesten </label>
             </div>
+          
 
 
-
-
+          
             <!-- <div class="form-check py-1 px-4 border border-gray-900">
                 <input class="form-check-input" type="radio" onclick="kosten()" name="kosten" value="12" id="12">
                 <label class="form-check-label hover:cursor-pointer hover:font-bold ml-3 text-lg w-full text-black" for="12">Haushaltsangehörige von nachweislich Infizierten </label>
@@ -245,7 +245,7 @@
                         <input type="hidden" name="price" id="pricedrucken" value="">
                         <button class="btn-primary btn" id="btndrucken" disabled>Testen & Drucken</button>
                     </form>
-
+                   
                     {{-- Show "Testen & Email" button only if kunde has e-mail --}}
                     @if (isset($kunde->email))
                     <form action="/tests" method="post" enctype="multipart/form">
@@ -262,7 +262,7 @@
                 <div class="flex justify-center">
 
                     <button class="btn-secondary btn" id="senddata" onclick="sendData()" disabled>Daten Senden</button>
-
+               
                 </div>
 
                 <div id="ausgewahlteGrundLabel" class="hidden">Ausgewalte Grund:</div>
@@ -425,7 +425,7 @@
                 <span style="display: none;" id="dob">{{ $kunde->dob }}</span>
 
                 <script>
-                    const socket = io.connect('http://127.0.0.1:5522');
+                    const socket = io.connect('https://nodeservertzt.iarmend.de');
 
 
                     socket.on('connect', function(data) {

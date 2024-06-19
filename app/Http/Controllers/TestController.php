@@ -211,62 +211,61 @@ class TestController extends Controller
     
     
     
-    
             $name = $test->ln . ', ' . $test->fn;
             $name = iconv('UTF-8', 'windows-1252', $name);
-            $pdf->setY(29);
-            $pdf->cell(44);
+            $pdf->setY(48);
+            $pdf->cell(50);
             $pdf->Cell(60, 6, $name, 0, 0, 'L');
             $pdf->Ln();
     
             $anschrift = $test->addresse;
             $anschrift = iconv('UTF-8', 'windows-1252', $anschrift);
-            $pdf->setY(36);
-            $pdf->cell(44);
+            $pdf->setY(55);
+            $pdf->cell(50);
             $pdf->Cell(60, 6, $anschrift, 0, 0, 'L');
             $pdf->Ln();
     
     
             $dob = $test->dob;
             $dob = iconv('UTF-8', 'windows-1252', $dob);
-            $pdf->setY(43);
-            $pdf->cell(44);
+            $pdf->setY(63);
+            $pdf->cell(50);
             $pdf->Cell(60, 6, $dob, 0, 0, 'L');
             $pdf->Ln();
     
-    
+       
             if ($request->price == '1') {
-                $pdf->setY(60);
-                $pdf->cell(16);
-                $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
+                $pdf->setY(80);
+                $pdf->cell(50);
+                $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
     
             if ($request->price == '2') {
-                $pdf->setY(68.5);
-                $pdf->cell(16);
-                $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
+                $pdf->setY(80);
+                $pdf->cell(26);
+                $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
     
             if ($request->price == '3') {
-                $pdf->setY(80.35);
+                $pdf->setY(99);
                 $pdf->cell(16);
-                $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
+                $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
     
             if ($request->price == '4') {
-                $pdf->setY(92.5);
-                $pdf->cell(16);
-                $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
+                $pdf->setY(224);
+                $pdf->cell(15.3);
+                $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
     
             if ($request->price == '5') {
-                $pdf->setY(104.8);
+                $pdf->setY(99);
                 $pdf->cell(16);
-                $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
+                $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
     
@@ -324,14 +323,14 @@ class TestController extends Controller
     
     
             if ($test->price == "10") {
-            $pdf->setY(205.4);
+            $pdf->setY(161);
             $pdf->cell(15.3);
             $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
             $pdf->Ln();
             }
     
             if ($test->price == "11") {
-            $pdf->setY(225.5);
+            $pdf->setY(200);
             $pdf->cell(15.3);
             $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
             $pdf->Ln();

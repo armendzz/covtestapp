@@ -41,7 +41,7 @@ class HomeController extends Controller
     }
 
     public function import(){
-        Excel::import(new TestsImport, 'all_bookings_818878.csv');
+        Excel::import(new TestsImport, 'all_bookings_158953.csv');
 
         return redirect('/')->with('success', 'All good!');
     }
