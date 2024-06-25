@@ -167,7 +167,7 @@ class TestController extends Controller
         $pdf->Cell(99.8, 6, date("d.m.Y"), 0, 0, 'L');
         $pdf->Ln();
         $pdf->Image('signature/'.Auth::user()->id.'.png',160,195,-300);
-       
+
         $pdf->Output('F', $filename);
 
             $pdf->Output('F', $filename);
@@ -179,118 +179,118 @@ class TestController extends Controller
 
             $selbstauskunft->test_id = $test->id;
             $selbstauskunft->grund = $request->price;
-    
-    
+
+
             $foldername = 'selbstauskunft/' . date("Y/m/d");
-    
+
             if (!file_exists($foldername)) {
                 mkdir($foldername, 0777, true);
             }
-    
+
             $name = $test->ln . ', ' . $test->fn;
-    
+
             $filename = $foldername . '/' . date("d.m.Y  -  H-i-s ") . $name . '.pdf';
-    
-    
+
+
             $selbstauskunft->filename = $filename;
             $selbstauskunft->save();
-    
-    
+
+
             $pdf = new Fpdi();
-    
+
             $pageCount = $pdf->setSourceFile('selbstauskunft.pdf');
-    
+
             $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
-    
+
             $pdf->addPage();
             $pdf->useTemplate($pageId, 0, 0, 210, 297);
             $pdf->SetFont('Helvetica');
             $pdf->SetTextColor(0, 0, 0);
             $pdf->SetFontSize(11);
             $pdf->SetXY(10, 30);
-    
-    
-    
+
+
+
             $name = $test->ln . ', ' . $test->fn;
             $name = iconv('UTF-8', 'windows-1252', $name);
             $pdf->setY(48);
             $pdf->cell(50);
             $pdf->Cell(60, 6, $name, 0, 0, 'L');
             $pdf->Ln();
-    
+
             $anschrift = $test->addresse;
             $anschrift = iconv('UTF-8', 'windows-1252', $anschrift);
             $pdf->setY(55);
             $pdf->cell(50);
             $pdf->Cell(60, 6, $anschrift, 0, 0, 'L');
             $pdf->Ln();
-    
-    
+
+
             $dob = $test->dob;
             $dob = iconv('UTF-8', 'windows-1252', $dob);
             $pdf->setY(63);
             $pdf->cell(50);
             $pdf->Cell(60, 6, $dob, 0, 0, 'L');
             $pdf->Ln();
-    
-       
+
+
             if ($request->price == '1') {
                 $pdf->setY(80);
                 $pdf->cell(50);
                 $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
-    
+
             if ($request->price == '2') {
                 $pdf->setY(80);
                 $pdf->cell(26);
                 $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
-    
+
             if ($request->price == '3') {
                 $pdf->setY(99);
                 $pdf->cell(16);
                 $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
-    
+
             if ($request->price == '4') {
                 $pdf->setY(224);
                 $pdf->cell(15.3);
                 $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
-    
+
             if ($request->price == '5') {
                 $pdf->setY(99);
                 $pdf->cell(16);
                 $pdf->Cell(120, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
-    
-    
+
+
             // xhasha
             if ($test->price == "6" || $test->price == "7" ||  $test->price == "8") {
                 $pdf->setY(137.2);
                 $pdf->cell(15.7);
                 $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
-    
+
                 $pdf->setY(173.5);
                 $pdf->cell(25.6);
                 $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
-    
-    
+
+
             if ($test->price == "6") {
                 $pdf->setY(145.3);
                 $pdf->cell(25.6);
                 $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
-    
+
             if ($test->price == "7") {
                 $pdf->setY(153.4);
                 $pdf->cell(25.6);
@@ -303,62 +303,62 @@ class TestController extends Controller
                 $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
-    
-    
-    
-    
+
+
+
+
             // shtata
             if ($test->price == "9") {
-    
+
                 $pdf->setY(182);
                 $pdf->cell(15.7);
                 $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
-    
+
                 $pdf->setY(193.8);
                 $pdf->cell(25.6);
                 $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
                 $pdf->Ln();
             }
-    
-    
+
+
             if ($test->price == "10") {
             $pdf->setY(161);
             $pdf->cell(15.3);
             $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
             $pdf->Ln();
             }
-    
+
             if ($test->price == "11") {
             $pdf->setY(200);
             $pdf->cell(15.3);
             $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
             $pdf->Ln();
             }
-    
+
             if ($test->price == "12") {
             $pdf->setY(237.4);
             $pdf->cell(15.3);
             $pdf->Cell(99.8, 6, 'X', 0, 0, 'L');
             $pdf->Ln();
             }
-    
+
             $ortUndDatum = env('STATION_ORT') . ', ' . date("d.m.Y");
             $ortUndDatum = iconv('UTF-8', 'windows-1252', $ortUndDatum);
             $pdf->setY(260);
             $pdf->cell(15.4);
             $pdf->Cell(99.8, 6, $ortUndDatum, 0, 0, 'L');
             $pdf->Ln();
-    
+
             $pdf->Image($request->sign, 113, 250, -300, 0, "PNG");
-    
-    
+
+
             $pdf->Output('F', $filename);
         }
 
-       
 
-    
+
+
         return redirect('/dashboard');
     }
 
@@ -627,10 +627,10 @@ class TestController extends Controller
             if(file_exists($test->selbstauskunft->filename)){
                 unlink($test->selbstauskunft->filename);
             }
-         
-            
+
+
         }
-      
+
         $test->delete();
         return redirect('/dashboard');
     }
@@ -639,7 +639,7 @@ class TestController extends Controller
     {
 
         // Get all tests without ergebniss
-        $tests = Test::whereNull('ergebnis')->with('kunde')->orderBy('created_at', 'asc')->get();
+        $tests = Test::whereNull('ergebnis')->with('kunde')->orderBy('created_at', 'asc')->paginate(20);
         return view('tests/inwartezeit', ['tests' => $tests]);
     }
 
@@ -649,14 +649,14 @@ class TestController extends Controller
         // Get test to update result
         $test = Test::find($id);
 
-        // Get month, name, date and time to create a unique filename for PDF 
-        $month = 'testen/' . date("m-Y");
+        // Get month, name, date and time to create a unique filename for PDF
+        $month = 'leistung/' . $test->created_at->format('m-Y');
         $name = $test->ln . ', ' . $test->fn;
         $emailnamekunde = $test->ln . ', ' . $test->fn;
 
-        
-        $filename = $month . '/' . date("d.m.Y  -  H-i-s ") . $name . '.pdf';
-   
+
+        $filename = $month . '/' . str_replace(':', '-', $test->created_at) . ' ' . $name . '.pdf';
+
         $data = [
             'ergebnis' => $request->ergebnis,
             'filename' => $filename,
@@ -673,11 +673,18 @@ class TestController extends Controller
         $test = Test::where('id', '=', $id)->with('kunde')->first();
         $testnr = $test->test_nr;
 
+
+        // Decode base64 signature and save as a temporary file
+$base64_str = substr($request->sign, strpos($request->sign, ",") + 1);
+$image = base64_decode($base64_str);
+$image_path = 'temp_sign.png';
+file_put_contents($image_path, $image);
+
         // Start PDF filling
 
         $pdf = new Fpdi();
 
-        $pageCount = $pdf->setSourceFile('testtemplate.pdf');
+        $pageCount = $pdf->setSourceFile('essentzt.pdf');
         $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
 
         $pdf->addPage();
@@ -687,193 +694,38 @@ class TestController extends Controller
         $pdf->SetFontSize(10);
         $pdf->SetXY(10, 30);
 
-        // $pdf->SetFontSize(13);
-        // $pdf->setY(7);
-        // $pdf->cell(0.7);
-        // $pdf->Cell(174, 6, 'Test-Nr: '. $testnr, 0, 0, 'R');
-        // $pdf->Ln();
 
         $pdf->SetFontSize(10);
         $pdf->setY(56);
-        $pdf->cell(82);
+        $pdf->cell(50);
         $pdf->Cell(97, 12, '', 0, 0, 'L');
         $pdf->Ln();
         $pdf->setY(52.4);
-        $pdf->cell(82);
-        $zentrumname = iconv('UTF-8', 'windows-1252', env('APP_NAME'));
-        $pdf->Cell(97, 12, $zentrumname, 0, 0, 'L');
+        $pdf->cell(72);
+        $name = iconv('UTF-8', 'windows-1252', $name);
+        $pdf->Cell(50, 30, $name, 0, 0, 'L');
         $pdf->Ln();
         $pdf->setY(56);
         $pdf->cell(82);
-        $address = iconv('UTF-8', 'windows-1252', Auth::user()->addresse);
-
-        $pdf->Cell(97, 12, $address, 0, 0, 'L');
-        $pdf->Ln();
-        $pdf->setY(60);
-        $pdf->cell(82);
-        $teststelle = iconv('UTF-8', 'windows-1252', Auth::user()->teststelle);
-
-        $pdf->Cell(97, 12, 'Teststellen-Nr ' . $teststelle, 0, 0, 'L');
-        $pdf->Ln();
-        $name = iconv('UTF-8', 'windows-1252', $name);
-        $pdf->setY(73);
-        $pdf->cell(62.7);
-        $pdf->Cell(124, 6, $name, 0, 0, 'L');
-        $pdf->Ln();
-        $pdf->setY(80.5);
-        $pdf->cell(62.7);
-        $address = iconv('UTF-8', 'windows-1252', $test->addresse);
-        $pdf->Cell(124, 6, $address, 0, 0, 'L');
-        $pdf->Ln();
-        $pdf->setY(88);
-        $pdf->cell(62.7);
-        $pdf->Cell(124, 6, date("d.m.Y", strtotime($test->dob)), 0, 0, 'L');
-        $pdf->Ln();
-        //id number
-        $pdf->setY(95.8);
-        $pdf->cell(80);
-        $pdf->Cell(105.8, 6, $test->kunde->idnumber, 0, 0, 'L');
-        $pdf->Ln();
-
-        //tel
-        $pdf->SetFontSize(11);
-        $pdf->setY(103.4);
-        $pdf->cell(14.1);
-        $pdf->Cell(105.8, 6, 'Tel:', 0, 0, 'L');
-        $pdf->Ln();
-        $pdf->SetFontSize(10);
-        $pdf->setY(103.4);
-        $pdf->cell(22.7);
-        $pdf->Cell(35, 6, $test->phone, 1, 0, 'L');
-        $pdf->Ln();
-        //email
-        $pdf->SetFontSize(11);
-        $pdf->setY(103.4);
-        $pdf->cell(62);
-        $pdf->Cell(105.8, 6, 'E-Mail:', 0, 0, 'L');
-        $pdf->Ln();
-        $pdf->SetFontSize(10);
-        $pdf->setY(103.4);
-        $pdf->cell(78.5);
-        $pdf->Cell(99, 6, $test->email, 1, 0, 'L');
-        $pdf->Ln();
 
 
-        $pdf->setY(118);
-        $pdf->cell(62.7);
-        $pdf->Cell(124, 6, 'COVID-19 Antigen Rapid Test', 0, 0, 'L');
-        $pdf->Ln();
-
-        $pdf->setY(126);
-        $pdf->cell(62.7);
-        $hersteller = iconv('UTF-8', 'windows-1252', $test->hersteller);
-        $pdf->Cell(124, 6, $hersteller, 0, 0, 'L');
-        $pdf->Ln();
-
-        $pdf->setY(134);
-        $pdf->cell(87);
-        $pdf->Cell(99.8, 6, date("d.m.Y  -  H:i", strtotime($test->created_at)), 0, 0, 'L');
-        $pdf->Ln();
-
-        $pdf->setY(142);
-        $pdf->cell(62.7);
-        $username = iconv('UTF-8', 'windows-1252', Auth::user()->name);
-        $pdf->Cell(124, 6, $username, 0, 0, 'L');
-        $pdf->Ln();
-
-        if ($test->price == "1" || $test->price == "2" || $test->price == "3" || $test->price == "4" || $test->price == "5" || $test->price == "10" || $test->price == "11" ||  $test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == "12") {
-            $pdf->setY(163);
-            $pdf->cell(45);
-            $pdf->SetFontSize(20);
-            $pdf->Cell(5, 6, 'X', 0, 0, 'L');
-            $pdf->Ln();
-        }
-
-
-        if ($test->price == "13") {
-            $pdf->setY(163);
-            $pdf->cell(168);
-            $pdf->SetFontSize(20);
-            $pdf->Cell(5, 6, 'X', 0, 0, 'L');
-            $pdf->Ln();
-        }
-
-
-        if ($test->ergebnis == 7) {
-            //if positiv
-            $pdf->setY(182);
-            $pdf->cell(58);
-            $pdf->SetFontSize(20);
-            $pdf->Cell(5, 6, 'X', 0, 0, 'L');
-            $pdf->Ln();
-        } else if ($test->ergebnis == 6) {
-            //if negativ
-            $pdf->setY(182);
-            $pdf->cell(122.7);
-            $pdf->SetFontSize(20);
-            $pdf->Cell(5, 6, 'X', 0, 0, 'L');
-            $pdf->Ln();
-        } else if ($test->ergebnis == 8) {
-            // if ungultig
-            $pdf->setY(182);
-            $pdf->cell(133);
-            $pdf->SetFontSize(20);
-            $pdf->Cell(5, 6, 'Ungultig', 0, 0, 'L');
-            $pdf->Ln();
-        }
-        if ($test->digital == '1') {
-            $pdf->SetFontSize(10);
-            $pdf->setY(200);
-            $pdf->cell(45);
-            $pdf->Cell(99.8, 6, "Dieses Schreiben wurde maschinell erstellt", 0, 0, 'L');
-            $pdf->Ln();
-            $pdf->setY(204);
-            $pdf->cell(45);
-            $pdf->Cell(99.8, 6, iconv('UTF-8', 'windows-1252', "und ist ohne Stempel gültig"), 0, 0, 'L');
-            $pdf->Ln();
-        }
-
-        $pdf->Ln();
-        $pdf->Image('signature/' . Auth::user()->id . '.png', 130, 195, -300);
-
-        $pdf->SetFontSize(15);
-        $pdf->setY(204);
+        $pdf->setY(120);
         $pdf->cell(15);
-        $pdf->Cell(99.8, 6, date("d.m.Y"), 0, 0, 'L');
+        $pdf->Cell(80, 120, 'Essen, ' . date("d.m.Y  -  H:i", strtotime($test->created_at)), 0, 0, 'L');
+        $pdf->Ln();
+
+
+        $pdf->Ln();
+        $pdf->Image($image_path, 130, 165, -300);
 
 
         $pdf->useTemplate($pageId, 0, 0, 210, 297);
-       
-       
 
-
-        if ($test->price == "6" || $test->price == "7" ||  $test->price == "8" || $test->price == "9" || $test->price == '13') {
-            $pdf->setSourceFile($test->rechnung->filename);
-            $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
-            $pdf->AddPage();
-
-            $pdf->useTemplate($pageId, 0, 0, 210, 297);
-        }
 
         $pdf->Output('F',  $filename);
-        // PDF Filling END 
+        // PDF Filling END
 
 
-        // if kunde want result per email
-        if ($test->digital == '1') {
-            $to_name = $emailnamekunde;
-            $to_email = $test->kunde->email;
-            $data = array();
-
-            Mail::send('emails.mail', $data, function ($message) use ($to_name, $to_email, $filename) {
-                $message->to($to_email, $to_name)
-                    ->subject('Bescheinigung')->attach($filename, [
-                        'as' => date("d.m.Y") . ' Testergebnis.pdf',
-                        'mime' => 'application/pdf',
-                    ]);
-                $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-            });
-        }
 
         // return test
         return redirect('tests/' . $test->id);
@@ -923,7 +775,7 @@ class TestController extends Controller
 
         $test = Test::where('id', '=', $id)->with('kunde')->with('user')->get();
 
-        // Get month, name, date and time to create a unique filename for PDF 
+        // Get month, name, date and time to create a unique filename for PDF
         $month = 'positivetesten/' . date("m-Y");
         $name = $test[0]->ln . ', ' . $test[0]->fn;
 

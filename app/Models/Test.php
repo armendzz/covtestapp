@@ -30,6 +30,7 @@ class Test extends Model
         'price',
         'email',
         'hersteller',
+        'created_at'
     ];
 
     // get kunde of this test

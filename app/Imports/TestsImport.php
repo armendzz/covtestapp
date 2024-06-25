@@ -2,12 +2,15 @@
 
 namespace App\Imports;
 
+use App\Models\Kunde;
 use App\Models\Test;
+use DateTime;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use stdClass;
+
 
 class TestsImport implements ToCollection, WithHeadingRow
 {
@@ -38,6 +41,7 @@ class TestsImport implements ToCollection, WithHeadingRow
 
         foreach ($rows as $row)
         {
+
             $p = new stdClass;
 
             $p2 = new stdClass;
@@ -47,6 +51,7 @@ class TestsImport implements ToCollection, WithHeadingRow
 
             $p->start = $row['start_date_time'];
             $p->email = $row['customer_email'];
+            $p->phone = $row['customer_phone'];
             $p->name = $row['name'];
             $p->nachname = $row['nachname'];
             $p->strasse = $row['strasse'];
@@ -60,6 +65,7 @@ class TestsImport implements ToCollection, WithHeadingRow
             if($row['2_person'] == 'on'){
                 $p2->start = $row['start_date_time'];
                 $p2->email = $row['customer_email'];
+                $p2->phone = $row['customer_phone'];
                 $p2->name = $row['person_2_name'];
                 $p2->nachname = $row['person_2_nachname'];
                 $p2->strasse = $row['person_2_strasse'];
@@ -74,6 +80,7 @@ class TestsImport implements ToCollection, WithHeadingRow
             if($row['3_person'] == 'on'){
                 $p3->start = $row['start_date_time'];
                 $p3->email = $row['customer_email'];
+                $p3->phone = $row['customer_phone'];
                 $p3->name = $row['person_3_name'];
                 $p3->nachname = $row['person_3_nachname'];
                 $p3->strasse = $row['person_3_strasse'];
@@ -88,6 +95,7 @@ class TestsImport implements ToCollection, WithHeadingRow
             if($row['4_person'] == 'on'){
                 $p4->start = $row['start_date_time'];
                 $p4->email = $row['customer_email'];
+                $p4->phone = $row['customer_phone'];
                 $p4->name = $row['person_4_name'];
                 $p4->nachname = $row['person_4_nachname'];
                 $p4->strasse = $row['person_4_strasse'];
@@ -102,6 +110,7 @@ class TestsImport implements ToCollection, WithHeadingRow
             if($row['5_person'] == 'on'){
                 $p5->start = $row['start_date_time'];
                 $p5->email = $row['customer_email'];
+                $p5->phone = $row['customer_phone'];
                 $p5->name = $row['person_5_name'];
                 $p5->nachname = $row['person_5_nachname'];
                 $p5->strasse = $row['person_5_strasse'];
@@ -115,6 +124,49 @@ class TestsImport implements ToCollection, WithHeadingRow
 
         }
 
-        dd($alltests);
+        foreach ($alltests as $t) {
+            $this->createTest($t);
+        }
+
+    }
+
+    public function createTest($data)  {
+
+        $client = Kunde::Create([
+            'fn' => ucfirst($data->name),
+            'ln' => ucfirst($data->nachname),
+            'addresse' => ucfirst($data->strasse . ' ' . $data->hausnummer . ', ' . $data->postleitzahl . ' ' . $data->stadt),
+            'dob' => date('Y-m-d', strtotime(str_replace('-', '/', $data->geburtsdatum_ttmmjjjj))),
+            'email' => $data->email,
+            'phone' => $data->phone,
+            'idnumber' => '',
+            'notice' => '',
+        ]);
+
+        $created_at = DateTime::createFromFormat('d M, Y, H:i', $data->start);
+
+
+
+        $testdata = [
+            'fn' => $client->fn,
+            'ln' => $client->ln,
+            'dob' => $client->dob,
+            'laborid' => '11111',
+            'teststelle' => '11111',
+            'hersteller' => 'oberhausen11111',
+            'salt' => strtoupper(bin2hex(random_bytes(16))),
+            'addresse' => $client->addresse,
+            'kunde_id' => $client->id,
+            'price' => 1,
+            'user_id' => 10,
+            'digital' => '0',
+            'test_nr' => '1',
+            'created_at' => $created_at->format('Y-m-d H:i:s')
+        ];
+
+
+        // Create test and send user to dashboard
+        Test::Create($testdata);
+
     }
 }
